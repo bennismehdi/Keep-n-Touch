@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Le monde" android:id="@+id/lemonde">
+
+    </item>
+
+    <item android:title="20minutes" android:id="@+id/vingtminutes">
+
+    </item>
+
+    <item android:title="Azurever" android:id="@+id/azurever">
+
+    </item>
+
+    <item android:title="Yoshino Traduction" android:id="@+id/yashinotraduction">
+
+    </item>
+
+    <item android:title="Abime Concept" android:id="@+id/abimeconcept">
+
+    </item>
+
+    <item android:title="La chaine météo" android:id="@+id/lachainemeteo">
+
+    </item>
+    <item android:title="LBC Commerce" android:id="@+id/commerce">
+
+    </item>
+</menu>

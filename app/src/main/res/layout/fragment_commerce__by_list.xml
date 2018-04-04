@@ -1,0 +1,22 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="co.example.um2.aigle.alo.Common.Commerce.Commerce_ByList">
+
+    <!-- TODO: Update blank fragment layout -->
+    <Button
+        android:layout_marginBottom="15dp"
+        android:text="Vendre"
+        android:id="@+id/vendreButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@id/vendreButton"
+        android:id="@+id/itemsRV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
+
+</RelativeLayout>

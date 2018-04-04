@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="co.example.um2.aigle.alo.Common.Commerce.VendreActivity"
+    android:orientation="vertical" android:padding="20dp">
+
+    <TextView
+        android:layout_marginBottom="30dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="25dp"
+        android:text="Votre Vente sera présentée dans votre localisation actuelle,
+Activez votre localisation pour éviter toute erreur"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/itemNom"
+            android:inputType="text"
+            android:hint="Nom de l'objet à vendre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/itemDescription"
+            android:inputType="text"
+            android:hint="Description de l'objet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/itemPrix"
+            android:inputType="numberDecimal"
+            android:hint="prix"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:orientation="vertical">
+        <TextView
+            android:layout_marginTop="20dp"
+            android:text="Votre position actuelle est : "
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/longitude"
+            android:layout_marginTop="20dp"
+            android:text="longitude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/lattitude"
+            android:text="lattitude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/buttonVendre"
+        android:layout_marginTop="20dp"
+        android:text="Mettre en ventre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="miseEnVente"/>
+
+
+</LinearLayout>
