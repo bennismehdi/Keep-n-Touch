@@ -25,6 +25,7 @@
             android:weightSum="2">
 
             <Button
+                android:onClick="goGadgets"
                 android:id="@+id/Button_actualite"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="co.example.um2.aigle.alo">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -40,6 +41,13 @@
             android:screenOrientation="portrait" />
         <activity android:name=".Common.Commerce.CommerceActivity" />
         <activity android:name=".Common.Commerce.VendreActivity"></activity>
+        <activity android:name=".Common.devmobil_tp1.DetailsActivity"></activity>
+        <activity
+            android:name=".Common.devmobil_tp1.ActualiteActivity"
+            android:label="@string/title_activity_actualite" />
+        <activity android:name=".Common.devmobil_tp1.ReveilActivity" />
+        <!-- suppress AndroidDomInspection -->
+        <receiver android:name=".Common.devmobil_tp1.AlarmReceveirActivity" />
     </application>
 
 </manifest>

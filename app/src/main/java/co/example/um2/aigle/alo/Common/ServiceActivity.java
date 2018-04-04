@@ -12,6 +12,7 @@ import android.view.View;
 
 import co.example.um2.aigle.alo.Common.Commerce.CommerceActivity;
 import co.example.um2.aigle.alo.Common.News.NewsActivity;
+import co.example.um2.aigle.alo.Common.devmobil_tp1.ActualiteActivity;
 import co.example.um2.aigle.alo.R;
 
 public class ServiceActivity extends AppCompatActivity {
@@ -21,6 +22,11 @@ public class ServiceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         setContentView(R.layout.activity_service);
+    }
+
+    public void goGadgets(View v){
+        Intent intent = new Intent(v.getContext(), ActualiteActivity.class);
+        startActivity(intent);
     }
 
     public void goNews(View v){
