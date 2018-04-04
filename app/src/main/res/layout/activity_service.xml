@@ -9,119 +9,74 @@
     android:gravity="center">
 <!--    goNews |  goCommerce -->
     <LinearLayout
-        android:layout_gravity="center"
-        android:layout_marginBottom="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:onClick="goNews"
-            android:layout_marginRight="10dp"
-            android:background="#FE0000"
-            android:gravity="center_vertical"
-            android:padding="10dp"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/news"/>
-
-            <TextView
-                android:layout_gravity="center"
-                android:textStyle="bold|italic"
-                android:textColor="#FFFFFF"
-                android:textSize="20dp"
-                android:text="Actualité"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="2"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:ignore="MissingConstraints">
 
         <LinearLayout
-            android:layout_marginLeft="10dp"
-            android:background="#FFBE00"
-            android:gravity="center_vertical"
-            android:padding="10dp"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.9"
+            android:orientation="horizontal"
+            android:weightSum="2">
 
-            <ImageView
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/weather"/>
-
-            <TextView
-                android:layout_gravity="center"
-                android:textStyle="bold|italic"
-                android:textColor="#FFFFFF"
-                android:textSize="20dp"
-                android:text="Météo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:onClick="goCommerce"
-            android:layout_marginRight="10dp"
-            android:background="#FF7F00"
-            android:gravity="center_vertical"
-            android:padding="10dp"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/commerce"/>
-
-            <TextView
-                android:layout_gravity="center"
-                android:textStyle="bold|italic"
-                android:textColor="#FFFFFF"
-                android:textSize="20dp"
-                android:text="Commerce"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginLeft="10dp"
-            android:background="#FF3F00"
-            android:gravity="center_vertical"
-            android:padding="10dp"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/network"/>
-
-            <TextView
+            <Button
+                android:onClick="goGadgets"
+                android:id="@+id/Button_actualite"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="-1dp"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:layout_gravity="center"
-                android:textStyle="bold|italic"
-                android:textColor="#FFFFFF"
-                android:textSize="20dp"
-                android:text="Réseaux sociaux"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:text="Gadgets" />
+
+            <Button
+                android:onClick="goCommerce"
+                android:id="@+id/Button_commerce"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Commerces" />
 
         </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2"
+            android:background="@color/colorTheme"
+            android:gravity="center"
+            android:text="Smartcity" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.9"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Social" />
+
+            <Button
+                android:onClick="goNews"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="News" />
+
+        </LinearLayout>
+
+
     </LinearLayout>
 </LinearLayout>
