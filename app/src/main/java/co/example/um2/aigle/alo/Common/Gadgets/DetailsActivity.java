@@ -1,4 +1,4 @@
-package co.example.um2.aigle.alo.Common.devmobil_tp1;
+package co.example.um2.aigle.alo.Common.Gadgets;
 
 import android.content.Intent;
 import android.os.Bundle;

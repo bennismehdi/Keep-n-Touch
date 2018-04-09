@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="co.example.um2.aigle.alo.Common.devmobil_tp1.ActualiteActivity">
+    tools:context="co.example.um2.aigle.alo.Common.Gadgets.ActualiteActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

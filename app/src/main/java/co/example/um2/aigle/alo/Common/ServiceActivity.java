@@ -1,10 +1,6 @@
 package co.example.um2.aigle.alo.Common;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
@@ -12,7 +8,7 @@ import android.view.View;
 
 import co.example.um2.aigle.alo.Common.Commerce.CommerceActivity;
 import co.example.um2.aigle.alo.Common.News.NewsActivity;
-import co.example.um2.aigle.alo.Common.devmobil_tp1.ActualiteActivity;
+import co.example.um2.aigle.alo.Common.Gadgets.ActualiteActivity;
 import co.example.um2.aigle.alo.R;
 
 public class ServiceActivity extends AppCompatActivity {

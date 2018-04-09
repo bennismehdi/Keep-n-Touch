@@ -1,4 +1,4 @@
-package co.example.um2.aigle.alo.Common.devmobil_tp1;
+package co.example.um2.aigle.alo.Common.Gadgets;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
