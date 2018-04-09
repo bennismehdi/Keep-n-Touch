@@ -4,14 +4,17 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.Console;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -25,6 +28,7 @@ import java.util.concurrent.ExecutionException;
 
 import co.example.um2.aigle.alo.Common.Configuration.ConfiguratoinActivity;
 import co.example.um2.aigle.alo.Common.Registration.RegistrationActivity;
+import co.example.um2.aigle.alo.Common.ServiceActivity;
 import co.example.um2.aigle.alo.Common.Welcome.WelcomeActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,6 +39,28 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        try{
+            SharedPreferences sharedPreferences = getSharedPreferences("AloAloPreferences", MODE_PRIVATE);
+
+            String id = sharedPreferences.getString("id", null);
+            String nom = sharedPreferences.getString("nom", null);
+            String prenom = sharedPreferences.getString("prenom", null);
+            String pseudo = sharedPreferences.getString("pseudo", null);
+            String mail = sharedPreferences.getString("mail", null);
+            String telephone = sharedPreferences.getString("telephone", null);
+            String motdepasse = sharedPreferences.getString("motdepasse", null);
+
+            if(id != null && nom != null && prenom != null && pseudo != null && mail != null && telephone != null && motdepasse != null){
+                Intent intent = new Intent(MainActivity.this, ServiceActivity.class);
+                startActivity(intent);
+            }
+
+
+        }catch (Exception e){
+            Log.d("Session" , "Pas de session préalablement créée");
+        }
+
 
         pseudo = (EditText) findViewById(R.id.pseudo);
         motdepasse = (EditText) findViewById(R.id.motdepasse);
