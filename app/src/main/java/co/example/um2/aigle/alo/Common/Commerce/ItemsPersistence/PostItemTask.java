@@ -45,7 +45,7 @@ public class PostItemTask extends AsyncTask<String, String, String> {
         InputStream inputStream;
         BufferedReader bufferedReader;
 
-        String path = "http://bennismehdi-001-site1.gtempurl.com/postitem.php";
+        String path = "https://quickandfresh.000webhostapp.com/postitem.php";
 
         try {
             URL url = new URL(path);

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Alo</string>
+    <string name="app_name">Keep N Touch</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="title_activity_actualite">ActualiteActivity</string>

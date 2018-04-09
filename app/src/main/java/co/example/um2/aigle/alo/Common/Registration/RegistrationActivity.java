@@ -62,6 +62,21 @@ public class RegistrationActivity extends AppCompatActivity {
             alert.setTitle("Erreur ");
             alert.setMessage("Les mot de passes ne sont pas pareils");
             alert.show();
+        }else if(telephone.length() < 10){
+            AlertDialog alert =  new AlertDialog.Builder(this).create();
+            alert.setTitle("Erreur ");
+            alert.setMessage("Le numero telephone doit avoir au moins 10 caractères");
+            alert.show();
+        }else if(nom.length() < 2){
+            AlertDialog alert =  new AlertDialog.Builder(this).create();
+            alert.setTitle("Erreur ");
+            alert.setMessage("Le nom telephone doit avoir au moins 2 caractères");
+            alert.show();
+        }else if(prenom.length() < 2){
+            AlertDialog alert =  new AlertDialog.Builder(this).create();
+            alert.setTitle("Erreur ");
+            alert.setMessage("Le prenom telephone doit avoir au moins 2 caractères");
+            alert.show();
         }else if(!isValidEmail(mail)){
             AlertDialog alert =  new AlertDialog.Builder(this).create();
             alert.setTitle("Erreur ");

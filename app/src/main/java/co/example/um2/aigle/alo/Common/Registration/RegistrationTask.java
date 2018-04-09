@@ -48,7 +48,7 @@ public class RegistrationTask extends AsyncTask<String, Void, String> {
 
         result = "";
 
-        String path = "http://bennismehdi-001-site1.gtempurl.com/Registration.php";
+        String path = "https://quickandfresh.000webhostapp.com/Registration.php";
 
         try {
             URL url = new URL(path);
