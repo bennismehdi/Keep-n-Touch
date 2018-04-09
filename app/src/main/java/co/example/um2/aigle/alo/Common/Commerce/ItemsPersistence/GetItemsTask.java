@@ -42,7 +42,7 @@ public class GetItemsTask extends AsyncTask<String, String, List<Item> >{
 
         result = "";
 
-        String path = "http://bennismehdi-001-site1.gtempurl.com/getitems.php";
+        String path = "http://quickandfresh.000webhostapp.com/getitems.php";
 
         try {
             URL url = new URL(path);

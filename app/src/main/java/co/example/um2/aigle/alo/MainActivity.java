@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             /*Définition de l'aynctask pour la requete HTTP de login*/
             AsyncTask<String, Void, String> asyncTask = new AsyncTask<String, Void, String>() {
 
-            private String path = "http://bennismehdi-001-site1.gtempurl.com/Login.php";
+            private String path = "https://quickandfresh.000webhostapp.com/Login.php";
             private String pseudo = "";
             private String motdepasse = "";
 
