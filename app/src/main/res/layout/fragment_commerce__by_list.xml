@@ -5,15 +5,38 @@
     tools:context="co.example.um2.aigle.alo.Common.Commerce.Commerce_ByList">
 
     <!-- TODO: Update blank fragment layout -->
-    <Button
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/llayout">
+        <Button
+            android:layout_marginBottom="15dp"
+            android:text="Vendre"
+            android:id="@+id/vendreButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/categoriesSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+        </Spinner>
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/research"
         android:layout_marginBottom="15dp"
-        android:text="Vendre"
-        android:id="@+id/vendreButton"
+        android:hint="Your research"
+        android:layout_below="@id/llayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <android.support.v7.widget.RecyclerView
-        android:layout_below="@id/vendreButton"
+        android:layout_below="@id/research"
         android:id="@+id/itemsRV"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

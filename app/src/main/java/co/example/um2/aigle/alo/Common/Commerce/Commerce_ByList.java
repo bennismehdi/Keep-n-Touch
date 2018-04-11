@@ -13,13 +13,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import co.example.um2.aigle.alo.Common.Commerce.ItemsPersistence.GetCategoriesTask;
+import co.example.um2.aigle.alo.Common.Commerce.ItemsPersistence.GetItemsByCategorieTask;
 import co.example.um2.aigle.alo.Common.Commerce.ItemsPersistence.GetItemsTask;
 import co.example.um2.aigle.alo.Common.Commerce.ListItems.Item;
 import co.example.um2.aigle.alo.Common.Commerce.ListItems.ItemAdapter;
@@ -42,6 +47,8 @@ public class Commerce_ByList extends Fragment {
     private ItemAdapter itemAdapter;
     private Button vendreButton;
     private LocationManager locationManager;
+    private Spinner categoriesSpinner;
+    private List<Item> items = new ArrayList<Item>();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -112,17 +119,45 @@ public class Commerce_ByList extends Fragment {
             }
         });
         itemsRV = (RecyclerView) v.findViewById(R.id.itemsRV);
+        categoriesSpinner = (Spinner) v.findViewById(R.id.categoriesSpinner);
 
         GetItemsTask getItemsTask = new GetItemsTask(container.getContext());
-        List<Item> items = new ArrayList<Item>();
+
+        List<String> categories = new ArrayList<String>();
+        GetCategoriesTask getCategoriesTask = new GetCategoriesTask();
 
         try {
-            items = getItemsTask.execute().get();
+            this.items = getItemsTask.execute().get();
+            categories = getCategoriesTask.execute().get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(v.getContext(), android.R.layout.simple_spinner_item, categories);
+        categoriesSpinner.setAdapter(adapter);
+        categoriesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("Selected", categoriesSpinner.getSelectedItem().toString());
+                GetItemsByCategorieTask getItemsByCategorieTask = new GetItemsByCategorieTask();
+                try {
+                    items = getItemsByCategorieTask.execute(categoriesSpinner.getSelectedItem().toString()).get();
+                    itemAdapter = new ItemAdapter(items);
+                    itemsRV.setAdapter(itemAdapter);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         itemsRV.setLayoutManager(new LinearLayoutManager(container.getContext()));
         itemAdapter = new ItemAdapter(items);
