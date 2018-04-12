@@ -1,5 +1,6 @@
 package co.example.um2.aigle.alo.Common.Commerce;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -13,9 +14,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -25,10 +28,13 @@ import java.util.concurrent.ExecutionException;
 
 import co.example.um2.aigle.alo.Common.Commerce.ItemsPersistence.GetCategoriesTask;
 import co.example.um2.aigle.alo.Common.Commerce.ItemsPersistence.GetItemsByCategorieTask;
+import co.example.um2.aigle.alo.Common.Commerce.ItemsPersistence.GetItemsByResearchTask;
 import co.example.um2.aigle.alo.Common.Commerce.ItemsPersistence.GetItemsTask;
 import co.example.um2.aigle.alo.Common.Commerce.ListItems.Item;
 import co.example.um2.aigle.alo.Common.Commerce.ListItems.ItemAdapter;
 import co.example.um2.aigle.alo.R;
+
+import static android.content.Context.INPUT_METHOD_SERVICE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -48,6 +54,8 @@ public class Commerce_ByList extends Fragment {
     private Button vendreButton;
     private LocationManager locationManager;
     private Spinner categoriesSpinner;
+    private Button searchButton;
+    private EditText searchText;
     private List<Item> items = new ArrayList<Item>();
 
     // TODO: Rename and change types of parameters
@@ -93,6 +101,9 @@ public class Commerce_ByList extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_commerce__by_list, container, false);
         locationManager = (LocationManager) v.getContext().getSystemService(v.getContext().LOCATION_SERVICE);
+
+
+
         vendreButton = (Button) v.findViewById(R.id.vendreButton);
         vendreButton.setOnClickListener(new View.OnClickListener() {
             boolean gps_enabled = false;
@@ -118,6 +129,26 @@ public class Commerce_ByList extends Fragment {
                 }
             }
         });
+
+        searchText = (EditText) v.findViewById(R.id.researchText);
+        searchButton = (Button) v.findViewById(R.id.searchButton);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GetItemsByResearchTask getItemsByResearchTask = new GetItemsByResearchTask();
+                List<Item> itemsResearch;
+                try {
+                    itemsResearch = getItemsByResearchTask.execute(searchText.getText().toString()).get();
+                    itemAdapter = new ItemAdapter(itemsResearch);
+                    itemsRV.setAdapter(itemAdapter);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
         itemsRV = (RecyclerView) v.findViewById(R.id.itemsRV);
         categoriesSpinner = (Spinner) v.findViewById(R.id.categoriesSpinner);
 
