@@ -50,7 +50,7 @@ public class GetCategoriesTask extends AsyncTask<String, String, List<String>>{
                     result += line;
                     String[] str = line.split("&bptkce&");
                     try{
-                        results.add(str[1]);
+                        results.add(str[0] + " : " +str[1]);
                     }catch (Exception e){
                         Log.d("Error", "This line is empty or false");
                     }

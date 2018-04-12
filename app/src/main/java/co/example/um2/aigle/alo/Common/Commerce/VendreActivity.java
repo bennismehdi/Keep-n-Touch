@@ -13,11 +13,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
+import co.example.um2.aigle.alo.Common.Commerce.ItemsPersistence.GetCategoriesTask;
 import co.example.um2.aigle.alo.Common.Commerce.ItemsPersistence.PostItemTask;
+import co.example.um2.aigle.alo.Common.ServiceActivity;
 import co.example.um2.aigle.alo.R;
 
 public class VendreActivity extends AppCompatActivity implements LocationListener {
@@ -26,6 +34,7 @@ public class VendreActivity extends AppCompatActivity implements LocationListene
     private TextView longitude, lattitude;
     private LocationManager locationManager;
     private String id;
+    private Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +53,18 @@ public class VendreActivity extends AppCompatActivity implements LocationListene
         itemPrix = (EditText) findViewById(R.id.itemPrix);
         longitude = (TextView) findViewById(R.id.longitude);
         lattitude = (TextView) findViewById(R.id.lattitude);
+        spinner = (Spinner) findViewById(R.id.spinner);
+
+        GetCategoriesTask getCategoriesTask = new GetCategoriesTask();
+        try {
+            List<String> categories = getCategoriesTask.execute().get();
+            ArrayAdapter<String> categoriesAdapter = new ArrayAdapter<String>(VendreActivity.this, android.R.layout.simple_list_item_1, categories);
+            spinner.setAdapter(categoriesAdapter);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
 
         locationManager = (LocationManager) this.getApplicationContext().getSystemService(LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -117,14 +138,17 @@ public class VendreActivity extends AppCompatActivity implements LocationListene
             AlertDialog a = builder.create();
             a.show();
         }else{
+            String[] str = this.spinner.getSelectedItem().toString().split(" : ");
             PostItemTask postItemTask = new PostItemTask(this.getApplicationContext());
             postItemTask.execute(this.id,
-                    "3",
+                    str[0],
                     this.itemNom.getText().toString(),
                     this.itemDescription.getText().toString(),
                     this.itemPrix.getText().toString(),
                     this.longitude.getText().toString(),
                     this.lattitude.getText().toString());
         }
+        Intent intent = new Intent(VendreActivity.this, ServiceActivity.class);
+        startActivity(intent);
     }
 }

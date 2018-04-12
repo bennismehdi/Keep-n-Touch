@@ -141,9 +141,10 @@ public class Commerce_ByList extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("Selected", categoriesSpinner.getSelectedItem().toString());
+                String str[]  = categoriesSpinner.getSelectedItem().toString().split(" : ");
                 GetItemsByCategorieTask getItemsByCategorieTask = new GetItemsByCategorieTask();
                 try {
-                    items = getItemsByCategorieTask.execute(categoriesSpinner.getSelectedItem().toString()).get();
+                    items = getItemsByCategorieTask.execute(str[1]).get();
                     itemAdapter = new ItemAdapter(items);
                     itemsRV.setAdapter(itemAdapter);
                 } catch (InterruptedException e) {
