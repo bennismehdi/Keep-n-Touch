@@ -31,6 +31,6 @@ public class ItemHolder extends RecyclerView.ViewHolder {
         itemOwner.setText(item.getNom());
         itemNom.setText(item.getItem());
         itemDescription.setText(item.getDescription());
-        itemPrix.setText(item.getPrix());
+        itemPrix.setText(item.getPrix() + " €");
     }
 }
