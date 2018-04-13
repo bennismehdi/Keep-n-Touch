@@ -48,6 +48,10 @@ public class GetItemsByResearchTask extends AsyncTask <String, String, List<Item
 
                 String post_data = URLEncoder.encode("research", "utf-8");
                 post_data += "="+URLEncoder.encode(strings[0], "utf-8");
+                post_data += "&"+URLEncoder.encode("categorie", "utf-8");
+                post_data += "="+URLEncoder.encode(strings[1], "utf-8");
+
+                Log.d("data receiverd", strings[0] +" and "+ strings[1]);
 
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();

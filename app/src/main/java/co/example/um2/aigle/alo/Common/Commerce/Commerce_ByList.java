@@ -3,7 +3,9 @@ package co.example.um2.aigle.alo.Common.Commerce;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,7 +25,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 import co.example.um2.aigle.alo.Common.Commerce.ItemsPersistence.GetCategoriesTask;
@@ -56,6 +60,7 @@ public class Commerce_ByList extends Fragment {
     private Spinner categoriesSpinner;
     private Button searchButton;
     private EditText searchText;
+    private Button favorisButton;
     private List<Item> items = new ArrayList<Item>();
 
     // TODO: Rename and change types of parameters
@@ -138,7 +143,9 @@ public class Commerce_ByList extends Fragment {
                 GetItemsByResearchTask getItemsByResearchTask = new GetItemsByResearchTask();
                 List<Item> itemsResearch;
                 try {
-                    itemsResearch = getItemsByResearchTask.execute(searchText.getText().toString()).get();
+                    String str[] = categoriesSpinner.getSelectedItem().toString().split(" : ");
+
+                    itemsResearch = getItemsByResearchTask.execute(searchText.getText().toString(), str[0]).get();
                     itemAdapter = new ItemAdapter(itemsResearch);
                     itemsRV.setAdapter(itemAdapter);
                 } catch (InterruptedException e) {
@@ -152,6 +159,7 @@ public class Commerce_ByList extends Fragment {
         itemsRV = (RecyclerView) v.findViewById(R.id.itemsRV);
         categoriesSpinner = (Spinner) v.findViewById(R.id.categoriesSpinner);
 
+        /***************** Array Adapter pour les catégories ****************/
         GetItemsTask getItemsTask = new GetItemsTask(container.getContext());
 
         List<String> categories = new ArrayList<String>();
@@ -165,7 +173,7 @@ public class Commerce_ByList extends Fragment {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-
+        /***************** Array Adapter pour les catégories ****************/
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(v.getContext(), android.R.layout.simple_spinner_item, categories);
         categoriesSpinner.setAdapter(adapter);
         categoriesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -190,10 +198,49 @@ public class Commerce_ByList extends Fragment {
 
             }
         });
-
+        /**** Array Adapter de la liste des articles du commerce à la création de la vue ****/
         itemsRV.setLayoutManager(new LinearLayoutManager(container.getContext()));
         itemAdapter = new ItemAdapter(items);
         itemsRV.setAdapter(itemAdapter);
+
+        /****** GESTION DES RECHERCHES FAVORIS **************/
+
+        favorisButton = (Button) v.findViewById(R.id.favorisButton);
+        favorisButton.setOnClickListener(new View.OnClickListener() {
+            SharedPreferences sharedPreferences;
+            SharedPreferences.Editor editor;
+            Set<String> favoris;
+
+            @Override
+            public void onClick(View v) {
+                sharedPreferences = v.getContext().getSharedPreferences("AloAloPreferences", Context.MODE_PRIVATE);
+                this.editor = sharedPreferences.edit();
+
+                /*** Il faut vérifier si le set des préférences est déjà créé sinon il faut le créer ***/
+                favoris = sharedPreferences.getStringSet("favoris", null);
+                if(favoris == null){
+                    favoris = new HashSet<String>();
+                }
+
+                String fav = categoriesSpinner.getSelectedItem().toString() + " &bptkce& " + searchText.getText().toString();
+                favoris.add(fav);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                builder.setTitle("Confirmation");
+                builder.setMessage("Vous allez ajouter cet élément de recherche dans votre favoris : \nCategorie : "
+                + categoriesSpinner.getSelectedItem().toString() + "\nRecherche : " + searchText.getText().toString() + "\n"
+                +"Confirmez cela entrainera la reception de notification. Vous pouvez supprimer la préférence dans la configuration");
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        editor.putStringSet("favoris", favoris);
+                        editor.commit();
+                    }
+                }).setNegativeButton("Annuler", null);
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+        });
 
         return v;
     }

@@ -35,7 +35,7 @@
         android:layout_height="wrap_content">
         <EditText
             android:id="@+id/researchText"
-            android:layout_weight="1.5"
+            android:layout_weight="1"
             android:layout_marginBottom="15dp"
             android:hint="Your research"
             android:layout_width="wrap_content"
@@ -47,6 +47,16 @@
         <Button
             android:id="@+id/searchButton"
             android:text="search"
+            android:layout_weight="0.2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_weight="0.3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/favorisButton"
+            android:text="Favoris"
             android:layout_weight="0.2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

@@ -19,7 +19,7 @@
     <TextView
         android:id="@+id/itemNom"
         android:textColor="@color/colorPrimary"
-        android:textSize="20dp"
+        android:textSize="15dp"
         android:text="Item nom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
     <TextView
         android:id="@+id/itemPrix"
         android:textColor="@color/colorTheme"
-        android:textSize="20dp"
+        android:textSize="13dp"
         android:layout_toRightOf="@id/itemNom"
         android:text="Item Prix"
         android:layout_width="wrap_content"
