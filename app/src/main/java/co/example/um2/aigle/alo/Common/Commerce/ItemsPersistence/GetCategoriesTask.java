@@ -1,48 +1,36 @@
 package co.example.um2.aigle.alo.Common.Commerce.ItemsPersistence;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
 import co.example.um2.aigle.alo.Common.Commerce.ListItems.Item;
 
 /**
- * Created by L'Albatros on 4/2/2018.
+ * Created by L'Albatros on 4/10/2018.
  */
 
-public class GetItemsTask extends AsyncTask<String, String, List<Item> >{
-
-    private List<Item> items = new ArrayList<Item>();
-    public String result = "";
-    public Context c;
-
-    public GetItemsTask(Context c) {
-        this.c = c;
-    }
+public class GetCategoriesTask extends AsyncTask<String, String, List<String>>{
 
     @Override
-    protected List<Item> doInBackground(String... strings) {
+    protected List<String> doInBackground(String... strings) {
+        String result = "";
         HttpURLConnection httpURLConnection;
         InputStream inputStream;
         BufferedReader bufferedReader;
+        ArrayList<String> results = new ArrayList<String>();
 
-        result = "";
 
-        String path = "http://quickandfresh.000webhostapp.com/getitems.php";
+        String path = "https://quickandfresh.000webhostapp.com/getcategories.php";
 
         try {
             URL url = new URL(path);
@@ -60,15 +48,12 @@ public class GetItemsTask extends AsyncTask<String, String, List<Item> >{
                 int i = 0;
                 while((line = bufferedReader.readLine()) != null){
                     result += line;
-                    Log.d("Line " + i, line);
                     String[] str = line.split("&bptkce&");
                     try{
-                        Item item = new Item(str[0], str[1], str[2], str[3], str[4], str[5], str[6], str[7]);
-                        this.items.add(item);
+                        results.add(str[0] + " : " +str[1]);
                     }catch (Exception e){
                         Log.d("Error", "This line is empty or false");
                     }
-                    //i++;
                 }
                 inputStream.close();
                 bufferedReader.close();
@@ -82,7 +67,7 @@ public class GetItemsTask extends AsyncTask<String, String, List<Item> >{
             e.printStackTrace();
         }
 
-        Log.d("error? ", items.size() + "");
-        return this.items;
+        return results;
     }
+
 }

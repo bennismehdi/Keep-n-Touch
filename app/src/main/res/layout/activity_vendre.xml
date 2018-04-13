@@ -11,8 +11,7 @@
         android:layout_marginBottom="30dp"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="25dp"
-        android:text="Votre Vente sera présentée dans votre localisation actuelle,
-Activez votre localisation pour éviter toute erreur"
+        android:text="Votre Vente sera présentée dans votre localisation actuelle."
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -22,6 +21,15 @@ Activez votre localisation pour éviter toute erreur"
             android:hint="Nom de l'objet à vendre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="Catégorie de vente :"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></Spinner>
 
         <EditText
             android:id="@+id/itemDescription"

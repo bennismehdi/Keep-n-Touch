@@ -1,7 +1,5 @@
 package co.example.um2.aigle.alo.Common.Commerce.ItemsPersistence;
 
-import android.app.AlertDialog;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -16,36 +14,26 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
+
+import co.example.um2.aigle.alo.Common.Commerce.ListItems.Item;
 
 /**
- * Created by L'Albatros on 4/4/2018.
+ * Created by L'Albatros on 4/12/2018.
  */
 
-public class PostItemTask extends AsyncTask<String, String, String> {
-
-    private Context c;
-    private String result ="";
-
-    public PostItemTask(Context c){
-        this.c = c;
-    }
-
+public class GetItemsByResearchTask extends AsyncTask <String, String, List<Item>> {
     @Override
-    protected void onPreExecute() {
-
-    }
-
-    @Override
-    protected String doInBackground(String... strings) {
-        Log.d("Received",strings[0] + " " +strings[1] + " " +strings[2] + " " +strings[3] + " " +strings[4] + " " +strings[5] + " " +strings[6]);
-
+    protected List<Item> doInBackground(String... strings) {
+        ArrayList<Item> items = new ArrayList<Item>();
         HttpURLConnection httpURLConnection;
         OutputStream outputStream;
         BufferedWriter bufferedWriter;
         InputStream inputStream;
         BufferedReader bufferedReader;
 
-        String path = "https://quickandfresh.000webhostapp.com/postitem.php";
+        String path = "http://quickandfresh.000webhostapp.com/getitemsbyresearch.php";
 
         try {
             URL url = new URL(path);
@@ -58,22 +46,12 @@ public class PostItemTask extends AsyncTask<String, String, String> {
                 outputStream = httpURLConnection.getOutputStream();
                 bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "utf-8"));
 
-                String post_data = URLEncoder.encode("user_id", "utf-8");
+                String post_data = URLEncoder.encode("research", "utf-8");
                 post_data += "="+URLEncoder.encode(strings[0], "utf-8");
-                post_data += "&"+ URLEncoder.encode("categorie", "utf-8");
+                post_data += "&"+URLEncoder.encode("categorie", "utf-8");
                 post_data += "="+URLEncoder.encode(strings[1], "utf-8");
-                post_data += "&"+URLEncoder.encode("item", "utf-8");
-                post_data += "="+URLEncoder.encode(strings[2], "utf-8");
-                post_data += "&"+URLEncoder.encode("description", "utf-8");
-                post_data += "="+URLEncoder.encode(strings[3], "utf-8");
-                post_data += "&"+URLEncoder.encode("prix", "utf-8");
-                post_data += "="+URLEncoder.encode(strings[4], "utf-8");
-                post_data += "&"+URLEncoder.encode("longitude", "utf-8");
-                post_data += "="+URLEncoder.encode(strings[5], "utf-8");
-                post_data += "&"+URLEncoder.encode("lattitude", "utf-8");
-                post_data += "="+URLEncoder.encode(strings[6], "utf-8");
-                post_data += "&"+URLEncoder.encode("city", "utf-8");
-                post_data += "="+URLEncoder.encode(strings[7], "utf-8");
+
+                Log.d("data receiverd", strings[0] +" and "+ strings[1]);
 
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
@@ -83,9 +61,17 @@ public class PostItemTask extends AsyncTask<String, String, String> {
                 bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "utf-8"));
 
                 String line;
-
+                int i = 0;
                 while((line = bufferedReader.readLine()) != null){
-                    result += line;
+                    Log.d("Line " + i, line);
+                    String[] str = line.split("&bptkce&");
+                    try{
+                        Item item = new Item(str[0], str[1], str[2], str[3], str[4], str[5], str[6], str[7]);
+                        items.add(item);
+                    }catch (Exception e){
+                        Log.d("Error", "This line is empty or false");
+                    }
+                    //i++;
                 }
                 inputStream.close();
                 bufferedReader.close();
@@ -98,13 +84,6 @@ public class PostItemTask extends AsyncTask<String, String, String> {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-
-        Log.d("error? ", result);
-        return result;
-    }
-
-    @Override
-    protected void onPostExecute(String s) {
-
+        return items;
     }
 }

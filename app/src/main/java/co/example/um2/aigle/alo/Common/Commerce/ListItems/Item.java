@@ -13,8 +13,9 @@ public class Item {
     private String prix;
     private String longitude;
     private String lattitude;
+    private String city;
 
-    public Item(String nom, String categorie, String item, String description, String prix, String longitude, String lattitude) {
+    public Item(String nom, String categorie, String item, String description, String prix, String longitude, String lattitude, String city) {
         this.nom = nom;
         this.categorie = categorie;
         this.item = item;
@@ -22,6 +23,15 @@ public class Item {
         this.prix = prix;
         this.longitude = longitude;
         this.lattitude = lattitude;
+        this.city = city;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getNom() {
