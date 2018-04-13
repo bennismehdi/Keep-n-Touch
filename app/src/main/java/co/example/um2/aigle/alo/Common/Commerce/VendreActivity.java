@@ -4,6 +4,8 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -21,6 +23,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 import co.example.um2.aigle.alo.Common.Commerce.ItemsPersistence.GetCategoriesTask;
@@ -34,12 +37,17 @@ public class VendreActivity extends AppCompatActivity implements LocationListene
     private TextView longitude, lattitude;
     private LocationManager locationManager;
     private String id;
+    private String city;
     private Spinner spinner;
+    private List<Address> addresses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vendre);
+
+        Geocoder geocoder = new Geocoder(VendreActivity.this, Locale.getDefault());
+
 
         try{
             SharedPreferences sharedPreferences = getSharedPreferences("AloAloPreferences", MODE_PRIVATE);
@@ -81,6 +89,17 @@ public class VendreActivity extends AppCompatActivity implements LocationListene
             Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             longitude.setText(location.getLongitude()+"");
             lattitude.setText(location.getLatitude()+"");
+            this.addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+
+            if (addresses.size() > 0) {
+                this.city = this.addresses.get(0).getLocality();
+
+            }
+            else {
+                Log.d("Erreur", "Vous n'êtes pas localisé correctement, vérifiez votre GPS");
+                Intent intent = new Intent(VendreActivity.this, ServiceActivity.class);
+                startActivity(intent);
+            }
         }catch (Exception e){
             this.finish();
             Log.d("Error ?!!!!!!!!!!!!!", e.getMessage());
@@ -146,7 +165,8 @@ public class VendreActivity extends AppCompatActivity implements LocationListene
                     this.itemDescription.getText().toString(),
                     this.itemPrix.getText().toString(),
                     this.longitude.getText().toString(),
-                    this.lattitude.getText().toString());
+                    this.lattitude.getText().toString(),
+                    this.city);
         }
         Intent intent = new Intent(VendreActivity.this, ServiceActivity.class);
         startActivity(intent);

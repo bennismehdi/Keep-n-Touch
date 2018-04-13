@@ -72,6 +72,8 @@ public class PostItemTask extends AsyncTask<String, String, String> {
                 post_data += "="+URLEncoder.encode(strings[5], "utf-8");
                 post_data += "&"+URLEncoder.encode("lattitude", "utf-8");
                 post_data += "="+URLEncoder.encode(strings[6], "utf-8");
+                post_data += "&"+URLEncoder.encode("city", "utf-8");
+                post_data += "="+URLEncoder.encode(strings[7], "utf-8");
 
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();

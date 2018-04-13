@@ -17,6 +17,7 @@ public class ItemHolder extends RecyclerView.ViewHolder {
     private TextView itemNom;
     private TextView itemDescription;
     private TextView itemPrix;
+    private TextView itemCity;
 
     public ItemHolder(View itemView) {
         super(itemView);
@@ -25,6 +26,7 @@ public class ItemHolder extends RecyclerView.ViewHolder {
         itemOwner = (TextView) itemView.findViewById(R.id.itemOwner);
         itemDescription = (TextView) itemView.findViewById(R.id.itemDescription);
         itemPrix = (TextView) itemView.findViewById(R.id.itemPrix);
+        itemCity = (TextView) itemView.findViewById(R.id.itemCity);
     }
 
     public void display(Item item){
@@ -32,5 +34,6 @@ public class ItemHolder extends RecyclerView.ViewHolder {
         itemNom.setText(item.getItem());
         itemDescription.setText(item.getDescription());
         itemPrix.setText(item.getPrix() + " €");
+        itemCity.setText(item.getCity());
     }
 }
