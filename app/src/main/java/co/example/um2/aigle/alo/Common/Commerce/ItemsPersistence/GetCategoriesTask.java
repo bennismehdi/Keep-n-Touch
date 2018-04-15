@@ -46,6 +46,7 @@ public GetCategoriesTask(Context c, Spinner spinner, RecyclerView itemsRV, List<
         this.itemsRV = itemsRV;
         dialog = new ProgressDialog(c);
         this.categories = categories;
+        this.categories.clear();
         this.adapter = adapter;
         this.items = items;
         this.itemAdapter = itemAdapter;
@@ -59,8 +60,12 @@ public GetCategoriesTask(Context c, Spinner spinner, RecyclerView itemsRV, List<
 
     @Override
     protected void onPostExecute(List<String> strings) {
-
-        adapter.addAll(strings);
+        String phrase = "";
+        for(String s : strings){
+            phrase += s;
+        }
+        Log.d("categories", phrase);
+        adapter.notifyDataSetChanged();
 
 
         if(itemsRV != null){
@@ -89,7 +94,7 @@ public GetCategoriesTask(Context c, Spinner spinner, RecyclerView itemsRV, List<
         HttpURLConnection httpURLConnection;
         InputStream inputStream;
         BufferedReader bufferedReader;
-        ArrayList<String> results = new ArrayList<String>();
+
 
 
         String path = "https://quickandfresh.000webhostapp.com/getcategories.php";
@@ -112,7 +117,7 @@ public GetCategoriesTask(Context c, Spinner spinner, RecyclerView itemsRV, List<
                     result += line;
                     String[] str = line.split("&bptkce&");
                     try{
-                        results.add(str[0] + " : " +str[1]);
+                        categories.add(str[0] + " : " +str[1]);
                     }catch (Exception e){
                         Log.d("Error", "This line is empty or false");
                     }
@@ -129,7 +134,7 @@ public GetCategoriesTask(Context c, Spinner spinner, RecyclerView itemsRV, List<
             e.printStackTrace();
         }
 
-        return results;
+        return categories;
     }
 
 }

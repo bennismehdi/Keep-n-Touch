@@ -63,7 +63,7 @@ public class VendreActivity extends AppCompatActivity implements LocationListene
         spinner = (Spinner) findViewById(R.id.spinner);
         List<String> categories = new ArrayList<String>();
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(VendreActivity.this, android.R.layout.simple_list_item_1, categories);
-
+        spinner.setAdapter(arrayAdapter);
         GetCategoriesTask getCategoriesTask = new GetCategoriesTask(VendreActivity.this, spinner, null, categories, arrayAdapter, null, null);
         getCategoriesTask.execute();
 

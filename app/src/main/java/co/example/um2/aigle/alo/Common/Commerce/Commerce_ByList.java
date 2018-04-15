@@ -62,6 +62,7 @@ public class Commerce_ByList extends Fragment {
     private EditText searchText;
     private Button favorisButton;
     private List<Item> items;
+    static List<String> categories;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -166,11 +167,10 @@ public class Commerce_ByList extends Fragment {
 
 
         categoriesSpinner = (Spinner) v.findViewById(R.id.categoriesSpinner);
-        List<String> categories = new ArrayList<String>();
+        categories = new ArrayList<String>();
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(v.getContext(), android.R.layout.simple_list_item_1, categories);
         categoriesSpinner.setAdapter(arrayAdapter);
-        List<String> categories2 = new ArrayList<String>();
-        GetCategoriesTask getCategoriesTask = new GetCategoriesTask(container.getContext(),categoriesSpinner, itemsRV, categories2, arrayAdapter, itemAdapter, items);
+        GetCategoriesTask getCategoriesTask = new GetCategoriesTask(container.getContext(),categoriesSpinner, itemsRV, categories, arrayAdapter, itemAdapter, items);
         /***************** Array Adapter pour les catégories ****************/
 
 
