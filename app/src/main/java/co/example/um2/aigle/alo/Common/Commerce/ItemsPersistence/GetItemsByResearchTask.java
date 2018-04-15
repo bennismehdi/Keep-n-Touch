@@ -1,5 +1,7 @@
 package co.example.um2.aigle.alo.Common.Commerce.ItemsPersistence;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -18,15 +20,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.example.um2.aigle.alo.Common.Commerce.ListItems.Item;
+import co.example.um2.aigle.alo.Common.Commerce.ListItems.ItemAdapter;
 
-/**
- * Created by L'Albatros on 4/12/2018.
- */
 
 public class GetItemsByResearchTask extends AsyncTask <String, String, List<Item>> {
+
+    private List<Item> items;
+    private ItemAdapter itemAdapter;
+    private Context c;
+    private ProgressDialog dialog;
+
+    public GetItemsByResearchTask(List<Item> items, ItemAdapter itemAdapter, Context c) {
+        this.items = items;
+        this.itemAdapter = itemAdapter;
+        this.c = c;
+        dialog = new ProgressDialog(c);
+        items.clear();
+    }
+
+    @Override
+    protected void onPreExecute() {
+        dialog.setMessage("Fetch Items");
+        dialog.show();
+    }
+
+    @Override
+    protected void onPostExecute(List<Item> items) {
+        this.itemAdapter.setItems(items);
+        this.itemAdapter.notifyDataSetChanged();
+        if(dialog.isShowing()){
+            dialog.dismiss();
+        }
+    }
+
     @Override
     protected List<Item> doInBackground(String... strings) {
-        ArrayList<Item> items = new ArrayList<Item>();
         HttpURLConnection httpURLConnection;
         OutputStream outputStream;
         BufferedWriter bufferedWriter;

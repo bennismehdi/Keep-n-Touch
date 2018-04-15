@@ -61,7 +61,7 @@ public class Commerce_ByList extends Fragment {
     private Button searchButton;
     private EditText searchText;
     private Button favorisButton;
-    private List<Item> items = new ArrayList<Item>();
+    private List<Item> items;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -140,7 +140,7 @@ public class Commerce_ByList extends Fragment {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GetItemsByResearchTask getItemsByResearchTask = new GetItemsByResearchTask();
+                GetItemsByResearchTask getItemsByResearchTask = new GetItemsByResearchTask(items, itemAdapter, v.getContext());
                 List<Item> itemsResearch;
                 try {
                     String str[] = categoriesSpinner.getSelectedItem().toString().split(" : ");
@@ -156,54 +156,29 @@ public class Commerce_ByList extends Fragment {
             }
         });
 
+        items = new ArrayList<Item>();
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(v.getContext());
         itemsRV = (RecyclerView) v.findViewById(R.id.itemsRV);
-        categoriesSpinner = (Spinner) v.findViewById(R.id.categoriesSpinner);
-
-        /***************** Array Adapter pour les catégories ****************/
-        GetItemsTask getItemsTask = new GetItemsTask(container.getContext());
-
-        List<String> categories = new ArrayList<String>();
-        GetCategoriesTask getCategoriesTask = new GetCategoriesTask();
-
-        try {
-            this.items = getItemsTask.execute().get();
-            categories = getCategoriesTask.execute().get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-        /***************** Array Adapter pour les catégories ****************/
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(v.getContext(), android.R.layout.simple_spinner_item, categories);
-        categoriesSpinner.setAdapter(adapter);
-        categoriesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("Selected", categoriesSpinner.getSelectedItem().toString());
-                String str[]  = categoriesSpinner.getSelectedItem().toString().split(" : ");
-                GetItemsByCategorieTask getItemsByCategorieTask = new GetItemsByCategorieTask();
-                try {
-                    items = getItemsByCategorieTask.execute(str[1]).get();
-                    itemAdapter = new ItemAdapter(items);
-                    itemsRV.setAdapter(itemAdapter);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        /**** Array Adapter de la liste des articles du commerce à la création de la vue ****/
-        itemsRV.setLayoutManager(new LinearLayoutManager(container.getContext()));
         itemAdapter = new ItemAdapter(items);
+        itemsRV.setLayoutManager(mLayoutManager);
         itemsRV.setAdapter(itemAdapter);
+        GetItemsTask getItemsTask = new GetItemsTask(container.getContext(), items, itemAdapter);
 
-        /****** GESTION DES RECHERCHES FAVORIS **************/
+
+        categoriesSpinner = (Spinner) v.findViewById(R.id.categoriesSpinner);
+        List<String> categories = new ArrayList<String>();
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(v.getContext(), android.R.layout.simple_list_item_1, categories);
+        categoriesSpinner.setAdapter(arrayAdapter);
+        List<String> categories2 = new ArrayList<String>();
+        GetCategoriesTask getCategoriesTask = new GetCategoriesTask(container.getContext(),categoriesSpinner, itemsRV, categories2, arrayAdapter, itemAdapter, items);
+        /***************** Array Adapter pour les catégories ****************/
+
+
+
+
+
+        getItemsTask.execute();
+        getCategoriesTask.execute();
 
         favorisButton = (Button) v.findViewById(R.id.favorisButton);
         favorisButton.setOnClickListener(new View.OnClickListener() {

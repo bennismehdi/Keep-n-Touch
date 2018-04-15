@@ -1,6 +1,10 @@
 package co.example.um2.aigle.alo.Common.Commerce.ItemsPersistence;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -18,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.example.um2.aigle.alo.Common.Commerce.ListItems.Item;
+import co.example.um2.aigle.alo.Common.Commerce.ListItems.ItemAdapter;
 
 /**
  * Created by L'Albatros on 4/10/2018.
@@ -25,10 +30,43 @@ import co.example.um2.aigle.alo.Common.Commerce.ListItems.Item;
 
 public class GetItemsByCategorieTask extends AsyncTask<String, String, List<Item>> {
 
+    private ProgressDialog dialog;
+    private ItemAdapter itemAdapter;
+    private Context c;
+    List<Item> items;
+
+    public GetItemsByCategorieTask(Context c, List<Item> items, ItemAdapter itemAdapter) {
+        this.c = c;
+        this.dialog = new ProgressDialog(c);
+        this.itemAdapter = itemAdapter;
+        this.items = items;
+        items.clear();
+    }
+
+    @Override
+    protected void onPreExecute() {
+        dialog.setMessage("Fetch items by categories");
+        dialog.show();
+    }
+
+    @Override
+    protected void onPostExecute(List<Item> items) {
+        String phrase = "";
+        for(Item i : items){
+            phrase += i.getItem();
+        }
+        Log.d("items", phrase);
+        this.itemAdapter.setItems(items);
+        this.itemAdapter.notifyDataSetChanged();
+        if(dialog.isShowing()){
+            dialog.dismiss();
+        }
+    }
+
     @Override
     protected List<Item> doInBackground(String... strings) {
 
-        ArrayList<Item> items = new ArrayList<Item>();
+
         HttpURLConnection httpURLConnection;
         OutputStream outputStream;
         BufferedWriter bufferedWriter;

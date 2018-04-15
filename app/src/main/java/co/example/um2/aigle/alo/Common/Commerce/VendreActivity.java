@@ -48,12 +48,11 @@ public class VendreActivity extends AppCompatActivity implements LocationListene
 
         Geocoder geocoder = new Geocoder(VendreActivity.this, Locale.getDefault());
 
-
         try{
             SharedPreferences sharedPreferences = getSharedPreferences("AloAloPreferences", MODE_PRIVATE);
             id = sharedPreferences.getString("id", null);
         }catch (Exception e){
-            Log.d("Error", "Not able to open shared preferences");
+
         }
 
         itemNom = (EditText) findViewById(R.id.itemNom);
@@ -62,29 +61,18 @@ public class VendreActivity extends AppCompatActivity implements LocationListene
         longitude = (TextView) findViewById(R.id.longitude);
         lattitude = (TextView) findViewById(R.id.lattitude);
         spinner = (Spinner) findViewById(R.id.spinner);
+        List<String> categories = new ArrayList<String>();
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(VendreActivity.this, android.R.layout.simple_list_item_1, categories);
 
-        GetCategoriesTask getCategoriesTask = new GetCategoriesTask();
-        try {
-            List<String> categories = getCategoriesTask.execute().get();
-            ArrayAdapter<String> categoriesAdapter = new ArrayAdapter<String>(VendreActivity.this, android.R.layout.simple_list_item_1, categories);
-            spinner.setAdapter(categoriesAdapter);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+        GetCategoriesTask getCategoriesTask = new GetCategoriesTask(VendreActivity.this, spinner, null, categories, arrayAdapter, null, null);
+        getCategoriesTask.execute();
+
 
         locationManager = (LocationManager) this.getApplicationContext().getSystemService(LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling ce truc retourne quoi ?? Ajouter un test ici
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION},
-                    11);
-            //    ActivityCompat#requestPermissions
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION},11);
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-        if(locationManager == null){
-            Log.d("ERREUR DE NULLISSISME", "NULL");
-        }
         try{
             Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             longitude.setText(location.getLongitude()+"");
@@ -96,15 +84,12 @@ public class VendreActivity extends AppCompatActivity implements LocationListene
 
             }
             else {
-                Log.d("Erreur", "Vous n'êtes pas localisé correctement, vérifiez votre GPS");
                 Intent intent = new Intent(VendreActivity.this, ServiceActivity.class);
                 startActivity(intent);
             }
         }catch (Exception e){
             this.finish();
-            Log.d("Error ?!!!!!!!!!!!!!", e.getMessage());
         }
-
     }
 
     @Override
@@ -159,12 +144,7 @@ public class VendreActivity extends AppCompatActivity implements LocationListene
         }else{
             String[] str = this.spinner.getSelectedItem().toString().split(" : ");
             PostItemTask postItemTask = new PostItemTask(this.getApplicationContext());
-            postItemTask.execute(this.id,
-                    str[0],
-                    this.itemNom.getText().toString(),
-                    this.itemDescription.getText().toString(),
-                    this.itemPrix.getText().toString(),
-                    this.longitude.getText().toString(),
+            postItemTask.execute(this.id, str[0], this.itemNom.getText().toString(), this.itemDescription.getText().toString(), this.itemPrix.getText().toString(), this.longitude.getText().toString(),
                     this.lattitude.getText().toString(),
                     this.city);
         }

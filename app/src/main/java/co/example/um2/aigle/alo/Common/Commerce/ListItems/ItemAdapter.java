@@ -17,6 +17,15 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemHolder> {
 
     List<Item> items;
 
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+        notifyDataSetChanged();
+    }
+
     public ItemAdapter(List<Item> items) {
         this.items = items;
     }
