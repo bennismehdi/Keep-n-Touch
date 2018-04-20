@@ -1,6 +1,10 @@
 package co.example.um2.aigle.alo.Common.Commerce.ItemsPersistence;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -18,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.example.um2.aigle.alo.Common.Commerce.ListItems.Item;
+import co.example.um2.aigle.alo.Common.Commerce.ListItems.ItemAdapter;
 
 /**
  * Created by L'Albatros on 4/10/2018.
@@ -25,20 +30,54 @@ import co.example.um2.aigle.alo.Common.Commerce.ListItems.Item;
 
 public class GetItemsByCategorieTask extends AsyncTask<String, String, List<Item>> {
 
+    private ProgressDialog dialog;
+    private ItemAdapter itemAdapter;
+    private Context c;
+    private String url;
+    List<Item> items;
+
+    public GetItemsByCategorieTask(Context c, List<Item> items, ItemAdapter itemAdapter, String url) {
+        this.url = url;
+        this.c = c;
+        this.dialog = new ProgressDialog(c);
+        this.itemAdapter = itemAdapter;
+        this.items = items;
+        items.clear();
+    }
+
+    @Override
+    protected void onPreExecute() {
+        dialog.setMessage("Fetch items by categories");
+        dialog.show();
+    }
+
+    @Override
+    protected void onPostExecute(List<Item> items) {
+        Log.d("Trace", "You entered GetItemsByCategories onPostExecute:");
+        String phrase = "Trace : ";
+        for(Item i : this.items){
+            phrase += i.getItem();
+        }
+        Log.d("items", phrase);
+        this.itemAdapter.setItems(this.items);
+        this.itemAdapter.notifyDataSetChanged();
+        if(dialog.isShowing()){
+            dialog.dismiss();
+        }
+    }
+
     @Override
     protected List<Item> doInBackground(String... strings) {
 
-        ArrayList<Item> items = new ArrayList<Item>();
+        Log.d("Trace", "You entered GetItemsByCategories DoInBackground: ");
         HttpURLConnection httpURLConnection;
         OutputStream outputStream;
         BufferedWriter bufferedWriter;
         InputStream inputStream;
         BufferedReader bufferedReader;
 
-        String path = "https://quickandfresh.000webhostapp.com/getitemsbycategorie.php";
-
         try {
-            URL url = new URL(path);
+            URL url = new URL(this.url);
 
             try {
                 httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -65,7 +104,7 @@ public class GetItemsByCategorieTask extends AsyncTask<String, String, List<Item
                     String[] str = line.split("&bptkce&");
                     try{
                         Item item = new Item(str[0], str[1], str[2], str[3], str[4], str[5], str[6], str[7]);
-                        items.add(item);
+                        this.items.add(item);
                     }catch (Exception e){
                         Log.d("Error", "This line is empty or false");
                     }
@@ -82,6 +121,12 @@ public class GetItemsByCategorieTask extends AsyncTask<String, String, List<Item
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        return items;
+
+        String phrase = " Phrase "+ this.url +"? ";
+        for(Item i : this.items){
+            phrase += i.getItem();
+        }
+        Log.d("Trace background : ", phrase);
+        return this.items;
     }
 }

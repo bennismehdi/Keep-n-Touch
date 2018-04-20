@@ -31,11 +31,6 @@ public class PostItemTask extends AsyncTask<String, String, String> {
     }
 
     @Override
-    protected void onPreExecute() {
-
-    }
-
-    @Override
     protected String doInBackground(String... strings) {
         Log.d("Received",strings[0] + " " +strings[1] + " " +strings[2] + " " +strings[3] + " " +strings[4] + " " +strings[5] + " " +strings[6]);
 
