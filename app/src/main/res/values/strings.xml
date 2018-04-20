@@ -15,4 +15,13 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
+
+    <!-- Stringd related to weather -->
+    <string name="weather_clear">Clear weather</string>
+    <string name="weather_cloudy">Cloudy</string>
+    <string name="weather_partly_cloudy">Partly cloudy</string>
+    <string name="weather_hail">Hail</string>
+    <string name="weather_storm">Storm</string>
+    <string name="weather_rainy">Rainy</string>
+    <string name="weather_snowy">Snowy</string>
 </resources>

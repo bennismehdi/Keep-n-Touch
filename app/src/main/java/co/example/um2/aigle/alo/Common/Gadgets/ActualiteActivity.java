@@ -1,43 +1,44 @@
 package co.example.um2.aigle.alo.Common.Gadgets;
 
 
-import android.app.Activity;
-import android.content.Context;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.ArrayList;
+import java.util.Date;
+import java.io.IOException;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationListener;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.app.Activity;
+import android.content.Context;
 import android.support.v4.app.ActivityCompat;
+import android.content.pm.PackageManager;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.ImageView;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
 
 import co.example.um2.aigle.alo.R;
 import zh.wang.android.yweathergetter4a.WeatherInfo;
@@ -46,12 +47,13 @@ import zh.wang.android.yweathergetter4a.YahooWeatherInfoListener;
 
 //import com.example.dewispelaere.test.R;
 
-public class ActualiteActivity extends AppCompatActivity implements LocationListener, YahooWeatherInfoListener {
+public class ActualiteActivity extends Activity implements LocationListener, YahooWeatherInfoListener {
 
     private static int CODE_ACTIVITE = 1;
 
     private TextView textView_location;
     private TextView textView_weather;
+    private TextView textView_temperature;
     private ImageView imageView_weather;
     private Button button_retour;
     private Button button_reveil;
@@ -67,12 +69,10 @@ public class ActualiteActivity extends AppCompatActivity implements LocationList
 
 
     ArrayList<HashMap<String, String>> dataList = new ArrayList<HashMap<String, String>>();
-    static final String KEY_AUTHOR = "author";
     static final String KEY_TITLE = "title";
     static final String KEY_DESCRIPTION = "description";
     static final String KEY_URL = "url";
     static final String KEY_URLTOIMAGE = "urlToImage";
-    static final String KEY_PUBLISHEDAT = "publishedAt";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +87,7 @@ public class ActualiteActivity extends AppCompatActivity implements LocationList
 
         textView_location = findViewById(R.id.TextView_location);
         textView_weather = findViewById(R.id.TextView_weather);
+        textView_temperature = findViewById(R.id.TextView_temperature);
         imageView_weather = findViewById(R.id.ImageView_weather);
         button_retour = findViewById(R.id.Button_retour);
         button_reveil = findViewById(R.id.Button_reveil);
@@ -122,14 +123,14 @@ public class ActualiteActivity extends AppCompatActivity implements LocationList
             });
         }
 
-        button_reveil.setOnClickListener(new OnClickListener() {
+        button_reveil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivityForResult(intent, CODE_ACTIVITE);
             }
         });
 
-        button_retour.setOnClickListener(new OnClickListener() {
+        button_retour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setResult(RESULT_OK);
@@ -180,10 +181,7 @@ public class ActualiteActivity extends AppCompatActivity implements LocationList
     @Override
     public void gotWeatherInfo(WeatherInfo weatherInfo, YahooWeather.ErrorType errorType) {
         if(weatherInfo != null){
-            textView_weather.setText("weather: " + weatherInfo.getCurrentText() + "\n" +
-                    "temperature in ºC: " + weatherInfo.getCurrentTemp() + "\n" +
-                    "Code : " + weatherInfo.getCurrentCode() + "\n"
-            );
+            textView_temperature.setText("" + weatherInfo.getCurrentTemp() + "°C");
 
             //Traitement de la date et des horaires de lever/coucher du soleil pour permettre une comparaison
             int currentTimeH = new Date().getHours();
@@ -216,33 +214,43 @@ public class ActualiteActivity extends AppCompatActivity implements LocationList
             int code = weatherInfo.getCurrentCode();
             if ((code >= 0 && code <= 4 )|| (code >= 37 && code <= 39) || code == 45 || code == 47) {
                 imageView_weather.setImageResource(R.drawable.ic_storm);
+                textView_weather.setText(getResources().getString(R.string.weather_storm));
             }
             else if((code != 9 && code != 17 && code != 11 && code != 12 && code >= 5 && code <= 18) || (code >= 41 && code <= 43) || code == 46){
                 imageView_weather.setImageResource(R.drawable.ic_snow);
+                textView_weather.setText(getResources().getString(R.string.weather_snowy));
             }
             else if(code == 17 || code == 35){
                 imageView_weather.setImageResource(R.drawable.ic_hail);
+                textView_weather.setText(getResources().getString(R.string.weather_hail));
             }
             else if((code >= 19 && code <= 23 ) || (code >= 27 && code <= 30)){
                 if(nuit)
                     imageView_weather.setImageResource(R.drawable.ic_night_cloud);
                 else
                     imageView_weather.setImageResource(R.drawable.ic_partly_cloudy);
+
+                textView_weather.setText(getResources().getString(R.string.weather_partly_cloudy));
             }
             else if(code == 11 || code == 12 || code == 17){
                 if(nuit)
                     imageView_weather.setImageResource(R.drawable.ic_night_rain);
                 else
                     imageView_weather.setImageResource(R.drawable.ic_rain);
+
+                textView_weather.setText(getResources().getString(R.string.weather_rainy));
             }
             else if(code == 24 || code == 25 || code == 32 || code == 36){
                 if(nuit)
                     imageView_weather.setImageResource(R.drawable.ic_moon);
                 else
                     imageView_weather.setImageResource(R.drawable.ic_sun);
+
+                textView_weather.setText(getResources().getString(R.string.weather_clear));
             }
             else if(code == 26){
                 imageView_weather.setImageResource(R.drawable.ic_cloud);
+                textView_weather.setText(getResources().getString(R.string.weather_cloudy));
             }
             else{
                 //erreur : temps non connu
@@ -296,7 +304,7 @@ public class ActualiteActivity extends AppCompatActivity implements LocationList
                 listNews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     public void onItemClick(AdapterView<?> parent, View view,
                                             int position, long id) {
-                    Intent i = new Intent(ActualiteActivity.this, DetailsActivity.class);
+                        Intent i = new Intent(ActualiteActivity.this, DetailsActivity.class);
                         i.putExtra("url", dataList.get(+position).get(KEY_URL));
                         startActivity(i);
                     }
