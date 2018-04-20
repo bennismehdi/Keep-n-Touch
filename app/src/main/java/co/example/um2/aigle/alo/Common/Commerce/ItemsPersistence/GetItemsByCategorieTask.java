@@ -33,9 +33,11 @@ public class GetItemsByCategorieTask extends AsyncTask<String, String, List<Item
     private ProgressDialog dialog;
     private ItemAdapter itemAdapter;
     private Context c;
+    private String url;
     List<Item> items;
 
-    public GetItemsByCategorieTask(Context c, List<Item> items, ItemAdapter itemAdapter) {
+    public GetItemsByCategorieTask(Context c, List<Item> items, ItemAdapter itemAdapter, String url) {
+        this.url = url;
         this.c = c;
         this.dialog = new ProgressDialog(c);
         this.itemAdapter = itemAdapter;
@@ -51,12 +53,13 @@ public class GetItemsByCategorieTask extends AsyncTask<String, String, List<Item
 
     @Override
     protected void onPostExecute(List<Item> items) {
-        String phrase = "";
-        for(Item i : items){
+        Log.d("Trace", "You entered GetItemsByCategories onPostExecute:");
+        String phrase = "Trace : ";
+        for(Item i : this.items){
             phrase += i.getItem();
         }
         Log.d("items", phrase);
-        this.itemAdapter.setItems(items);
+        this.itemAdapter.setItems(this.items);
         this.itemAdapter.notifyDataSetChanged();
         if(dialog.isShowing()){
             dialog.dismiss();
@@ -66,17 +69,15 @@ public class GetItemsByCategorieTask extends AsyncTask<String, String, List<Item
     @Override
     protected List<Item> doInBackground(String... strings) {
 
-
+        Log.d("Trace", "You entered GetItemsByCategories DoInBackground: ");
         HttpURLConnection httpURLConnection;
         OutputStream outputStream;
         BufferedWriter bufferedWriter;
         InputStream inputStream;
         BufferedReader bufferedReader;
 
-        String path = "https://quickandfresh.000webhostapp.com/getitemsbycategorie.php";
-
         try {
-            URL url = new URL(path);
+            URL url = new URL(this.url);
 
             try {
                 httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -103,7 +104,7 @@ public class GetItemsByCategorieTask extends AsyncTask<String, String, List<Item
                     String[] str = line.split("&bptkce&");
                     try{
                         Item item = new Item(str[0], str[1], str[2], str[3], str[4], str[5], str[6], str[7]);
-                        items.add(item);
+                        this.items.add(item);
                     }catch (Exception e){
                         Log.d("Error", "This line is empty or false");
                     }
@@ -120,6 +121,12 @@ public class GetItemsByCategorieTask extends AsyncTask<String, String, List<Item
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        return items;
+
+        String phrase = " Phrase "+ this.url +"? ";
+        for(Item i : this.items){
+            phrase += i.getItem();
+        }
+        Log.d("Trace background : ", phrase);
+        return this.items;
     }
 }

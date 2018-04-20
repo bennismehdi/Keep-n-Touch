@@ -29,8 +29,10 @@ public class GetItemsByResearchTask extends AsyncTask <String, String, List<Item
     private ItemAdapter itemAdapter;
     private Context c;
     private ProgressDialog dialog;
+    private String url;
 
-    public GetItemsByResearchTask(List<Item> items, ItemAdapter itemAdapter, Context c) {
+    public GetItemsByResearchTask(List<Item> items, ItemAdapter itemAdapter, Context c, String url) {
+        this.url = url;
         this.items = items;
         this.itemAdapter = itemAdapter;
         this.c = c;
@@ -61,10 +63,8 @@ public class GetItemsByResearchTask extends AsyncTask <String, String, List<Item
         InputStream inputStream;
         BufferedReader bufferedReader;
 
-        String path = "http://quickandfresh.000webhostapp.com/getitemsbyresearch.php";
-
         try {
-            URL url = new URL(path);
+            URL url = new URL(this.url);
 
             try {
                 httpURLConnection = (HttpURLConnection) url.openConnection();

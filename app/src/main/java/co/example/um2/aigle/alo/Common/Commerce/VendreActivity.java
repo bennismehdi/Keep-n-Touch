@@ -64,7 +64,7 @@ public class VendreActivity extends AppCompatActivity implements LocationListene
         List<String> categories = new ArrayList<String>();
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(VendreActivity.this, android.R.layout.simple_list_item_1, categories);
         spinner.setAdapter(arrayAdapter);
-        GetCategoriesTask getCategoriesTask = new GetCategoriesTask(VendreActivity.this, spinner, null, categories, arrayAdapter, null, null);
+        GetCategoriesTask getCategoriesTask = new GetCategoriesTask(VendreActivity.this, spinner, null, categories, arrayAdapter, null, null, "https://quickandfresh.000webhostapp.com/getcategories.php" , null);
         getCategoriesTask.execute();
 
 
@@ -88,6 +88,12 @@ public class VendreActivity extends AppCompatActivity implements LocationListene
                 startActivity(intent);
             }
         }catch (Exception e){
+            AlertDialog.Builder builder = new AlertDialog.Builder(VendreActivity.this);
+            builder.setTitle("Erreur");
+            builder.setMessage("Erreur localisation ? ");
+            builder.setPositiveButton("Okey", null);
+            AlertDialog a = builder.create();
+            a.show();
             this.finish();
         }
     }

@@ -31,7 +31,6 @@ import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 import co.example.um2.aigle.alo.Common.Commerce.ItemsPersistence.GetCategoriesTask;
-import co.example.um2.aigle.alo.Common.Commerce.ItemsPersistence.GetItemsByCategorieTask;
 import co.example.um2.aigle.alo.Common.Commerce.ItemsPersistence.GetItemsByResearchTask;
 import co.example.um2.aigle.alo.Common.Commerce.ItemsPersistence.GetItemsTask;
 import co.example.um2.aigle.alo.Common.Commerce.ListItems.Item;
@@ -141,7 +140,7 @@ public class Commerce_ByList extends Fragment {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GetItemsByResearchTask getItemsByResearchTask = new GetItemsByResearchTask(items, itemAdapter, v.getContext());
+                GetItemsByResearchTask getItemsByResearchTask = new GetItemsByResearchTask(items, itemAdapter, v.getContext(), "http://quickandfresh.000webhostapp.com/getitemsbyresearch.php");
                 List<Item> itemsResearch;
                 try {
                     String str[] = categoriesSpinner.getSelectedItem().toString().split(" : ");
@@ -163,19 +162,15 @@ public class Commerce_ByList extends Fragment {
         itemAdapter = new ItemAdapter(items);
         itemsRV.setLayoutManager(mLayoutManager);
         itemsRV.setAdapter(itemAdapter);
-        GetItemsTask getItemsTask = new GetItemsTask(container.getContext(), items, itemAdapter);
+        GetItemsTask getItemsTask = new GetItemsTask(container.getContext(), items, itemAdapter, "http://quickandfresh.000webhostapp.com/getitems.php");
 
 
         categoriesSpinner = (Spinner) v.findViewById(R.id.categoriesSpinner);
         categories = new ArrayList<String>();
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(v.getContext(), android.R.layout.simple_list_item_1, categories);
         categoriesSpinner.setAdapter(arrayAdapter);
-        GetCategoriesTask getCategoriesTask = new GetCategoriesTask(container.getContext(),categoriesSpinner, itemsRV, categories, arrayAdapter, itemAdapter, items);
+        GetCategoriesTask getCategoriesTask = new GetCategoriesTask(container.getContext(),categoriesSpinner, itemsRV, categories, arrayAdapter, itemAdapter, items, "https://quickandfresh.000webhostapp.com/getcategories.php", "https://quickandfresh.000webhostapp.com/getitemsbycategorie.php");
         /***************** Array Adapter pour les catégories ****************/
-
-
-
-
 
         getItemsTask.execute();
         getCategoriesTask.execute();

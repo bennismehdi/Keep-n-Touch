@@ -36,8 +36,10 @@ public class GetItemsTask extends AsyncTask<String, String, List<Item> >{
     public String result = "";
     private Context c;
     private ProgressDialog dialog;
+    private String url;
 
-    public GetItemsTask(Context c, List<Item> items, ItemAdapter itemAdapter) {
+    public GetItemsTask(Context c, List<Item> items, ItemAdapter itemAdapter, String url) {
+        this.url = url;
         this.c = c;
         dialog = new ProgressDialog(c);
         this.itemAdapter = itemAdapter;
@@ -59,10 +61,8 @@ public class GetItemsTask extends AsyncTask<String, String, List<Item> >{
 
         result = "";
 
-        String path = "http://quickandfresh.000webhostapp.com/getitems.php";
-
         try {
-            URL url = new URL(path);
+            URL url = new URL(this.url);
 
             try {
                 httpURLConnection = (HttpURLConnection) url.openConnection();

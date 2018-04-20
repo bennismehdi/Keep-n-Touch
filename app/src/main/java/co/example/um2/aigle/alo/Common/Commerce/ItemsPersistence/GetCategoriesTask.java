@@ -39,8 +39,11 @@ public class GetCategoriesTask extends AsyncTask<String, String, List<String>>{
     private RecyclerView itemsRV;
     private List<Item> items;
     private ItemAdapter itemAdapter;
+    private String url, url2;
 
-public GetCategoriesTask(Context c, Spinner spinner, RecyclerView itemsRV, List<String> categories, ArrayAdapter<String> adapter, ItemAdapter itemAdapter, List<Item> items) {
+public GetCategoriesTask(Context c, Spinner spinner, RecyclerView itemsRV, List<String> categories, ArrayAdapter<String> adapter, ItemAdapter itemAdapter, List<Item> items, String urlCategories, String urlItemsByCity) {
+        this.url = urlCategories;
+        this.url2 = urlItemsByCity;
         this.c = c;
         this.spinner = spinner;
         this.itemsRV = itemsRV;
@@ -73,7 +76,8 @@ public GetCategoriesTask(Context c, Spinner spinner, RecyclerView itemsRV, List<
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     String str[]  = spinner.getSelectedItem().toString().split(" : ");
-                    GetItemsByCategorieTask getItemsByCategorieTask = new GetItemsByCategorieTask(c, items , itemAdapter);
+                    Log.d("Trace", "On Item Selected entered ");
+                    GetItemsByCategorieTask getItemsByCategorieTask = new GetItemsByCategorieTask(c, items , itemAdapter, url2);
                     getItemsByCategorieTask.execute(str[1]);
                 }
 
@@ -95,12 +99,8 @@ public GetCategoriesTask(Context c, Spinner spinner, RecyclerView itemsRV, List<
         InputStream inputStream;
         BufferedReader bufferedReader;
 
-
-
-        String path = "https://quickandfresh.000webhostapp.com/getcategories.php";
-
         try {
-            URL url = new URL(path);
+            URL url = new URL(this.url);
 
             try {
                 httpURLConnection = (HttpURLConnection) url.openConnection();
