@@ -40,14 +40,16 @@
             android:name=".Common.News.NewsActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".Common.Commerce.CommerceActivity" />
-        <activity android:name=".Common.Commerce.VendreActivity"></activity>
-        <activity android:name=".Common.Gadgets.DetailsActivity"></activity>
+        <activity android:name=".Common.Commerce.VendreActivity" />
+        <activity android:name=".Common.Gadgets.DetailsActivity" />
         <activity
             android:name=".Common.Gadgets.ActualiteActivity"
             android:label="@string/title_activity_actualite" />
         <activity android:name=".Common.Gadgets.ReveilActivity" />
         <!-- suppress AndroidDomInspection -->
         <receiver android:name=".Common.Gadgets.AlarmReceveirActivity" />
+
+        <activity android:name=".ChatActivity"></activity>
     </application>
 
 </manifest>

@@ -13,24 +13,23 @@
     <ImageView
         android:id="@+id/ImageView_news"
         android:layout_width="0dp"
-        android:layout_height="110dp"
-        android:layout_weight="1.5"/>
+        android:layout_height="50dp"
+        android:layout_weight="1.6"/>
 
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="2.5"
+        android:layout_weight="2.4"
         android:orientation="vertical"
         android:weightSum="2">
 
         <TextView
             android:id="@+id/TextView_newsT"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="5dp"
-            android:layout_weight="1"
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="2"
@@ -40,21 +39,21 @@
             android:text="This is news title"
             android:textColor="@color/colorPureWhite"
             android:textColorLink="@color/colorTheme"
-            android:textSize="10sp" />
+            android:textSize="8sp" />
 
+        <!--android:layout_weight="1"-->
         <TextView
             android:id="@+id/TextView_newsD"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textColor="@color/colorPureWhite"
-            android:textSize="9sp"
+            android:ellipsize="end"
             android:maxLines="4"
             android:minLines="2"
             android:scrollHorizontally="true"
-            android:ellipsize="end"
-            android:text="This is news description bla bla bla..."/>
+            android:text="This is news description bla bla bla..."
+            android:textColor="@color/colorPureWhite"
+            android:textSize="7sp" />
     </LinearLayout>
 
 
