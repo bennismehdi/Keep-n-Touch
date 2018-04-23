@@ -65,6 +65,7 @@ public class ActualiteActivity extends Activity implements LocationListener, Yah
 
     public double longitude;
     public double latitude;
+    public String myLocation;
 
 
 
@@ -102,14 +103,6 @@ public class ActualiteActivity extends Activity implements LocationListener, Yah
                     11);
         }
 
-        if(NewsFunction.isNetworkAvailable(getApplicationContext()))
-        {
-            DownloadNews newsTask = new DownloadNews();
-            newsTask.execute();
-        }else{
-            Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
-        }
-
         if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                 && ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
@@ -118,6 +111,15 @@ public class ActualiteActivity extends Activity implements LocationListener, Yah
                 public void onSuccess(Location location) {
                     if (location != null) {
                         onLocationChanged(location);
+
+                        if(NewsFunction.isNetworkAvailable(getApplicationContext()))
+                        {
+                            DownloadNews newsTask = new DownloadNews(myLocation);
+                            newsTask.execute();
+                        }else{
+                            Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
+                        }
+
                     }
                 }
             });
@@ -153,8 +155,9 @@ public class ActualiteActivity extends Activity implements LocationListener, Yah
 
         try {
             List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
-            Toast.makeText(getApplicationContext(), addresses.get(0).getLocality(), Toast.LENGTH_SHORT).show();
-            textView_location.setText(addresses.get(0).getLocality());
+            this.myLocation = addresses.get(0).getLocality();
+            textView_location.setText((CharSequence) this.myLocation);
+
             mYahooWeather.queryYahooWeatherByLatLon(getApplicationContext(), latitude, longitude, ActualiteActivity.this);
         } catch (IOException e) {
             e.printStackTrace();
@@ -263,6 +266,13 @@ public class ActualiteActivity extends Activity implements LocationListener, Yah
     }
 
     class DownloadNews extends AsyncTask<String, Void, String> {
+
+        String location;
+
+        public DownloadNews(String l){
+            this.location = l;
+        }
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -273,7 +283,7 @@ public class ActualiteActivity extends Activity implements LocationListener, Yah
 
             String urlParameters = "";
             //TO DO CHANGER "PARIS"
-            xml = NewsFunction.excuteGet("https://newsapi.org/v2/everything?q=paris&apiKey=9757edd7c39b47b3bfc103d3245dc3bf", urlParameters);
+            xml = NewsFunction.excuteGet("https://newsapi.org/v2/everything?q=" + this.location + "&apiKey=9757edd7c39b47b3bfc103d3245dc3bf", urlParameters);
             return  xml;
         }
         @Override
@@ -314,9 +324,6 @@ public class ActualiteActivity extends Activity implements LocationListener, Yah
                 Toast.makeText(getApplicationContext(), "No news found", Toast.LENGTH_SHORT).show();
             }
         }
-
-
-
     }
 
 }

@@ -12,10 +12,34 @@
         android:weightSum="2"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.15"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/Button_retour"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_centerHorizontal="true"
+                android:text="@string/button_back"/>
+
+            <Button
+                android:id="@+id/Button_options"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_centerHorizontal="true"
+                android:text="@string/button_options"/>
+
+        </LinearLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.8">
+            android:layout_weight="1.70">
 
             <ListView
                 android:id="@+id/Listview_chat"
@@ -37,27 +61,28 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.2"
-            android:weightSum="2">
+            android:layout_weight="0.15"
+            android:weightSum="2"
+            android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/Button_retour"
+            <EditText
+                android:id="@+id/EditText_message"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_centerHorizontal="true"
-                android:text="@string/button_back"/>
+                android:layout_weight="1.6"/>
 
             <Button
-                android:id="@+id/Button_options"
+                android:id="@+id/Button_envoi"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_centerHorizontal="true"
-                android:text="@string/button_options"/>
+                android:layout_weight="0.4"
+                android:textSize="23dp"
+                android:background="@color/colorPureBlack"
+                android:textColor="@color/colorPureWhite"
+                android:text=">"/>
+
 
         </LinearLayout>
-
 
     </LinearLayout>
 
