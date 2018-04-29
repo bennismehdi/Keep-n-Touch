@@ -23,6 +23,8 @@ public class MyOnClickListener implements View.OnClickListener {
         TextView name = (TextView) v.findViewById(R.id.itemNom);
         TextView owner = (TextView) v.findViewById(R.id.itemOwner);
         TextView prix = (TextView) v.findViewById(R.id.itemPrix);
+        TextView longitude = (TextView) v.findViewById(R.id.longitude);
+        TextView lattitude = (TextView) v.findViewById(R.id.lattitude);
 
         String str = telephone.getText().toString();
         AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
@@ -40,7 +42,8 @@ public class MyOnClickListener implements View.OnClickListener {
         intent.putExtra("name", name.getText().toString());
         intent.putExtra("owner", owner.getText().toString());
         intent.putExtra("prix", prix.getText().toString());
-
+        intent.putExtra("longitude", longitude.getText().toString());
+        intent.putExtra("lattitude", lattitude.getText().toString());
         v.getContext().startActivity(intent);
     }
 }

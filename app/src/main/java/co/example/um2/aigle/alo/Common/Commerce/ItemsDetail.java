@@ -4,13 +4,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import org.w3c.dom.Text;
 
 import co.example.um2.aigle.alo.R;
 
-public class ItemsDetail extends AppCompatActivity {
+public class ItemsDetail extends AppCompatActivity implements OnMapReadyCallback {
 
     TextView itemName, itemTelephone, itemCity, itemDescription, owner, prix;
+    double longitude, lattitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +34,8 @@ public class ItemsDetail extends AppCompatActivity {
         itemDescription = (TextView) findViewById(R.id.itemDescription);
         owner = (TextView) findViewById(R.id.owner);
         prix = (TextView) findViewById(R.id.prix);
-
+        longitude = Double.parseDouble(b.getString("longitude"));
+        lattitude = Double.parseDouble(b.getString("lattitude"));
 
         owner.setText(b.getString("owner"));
         itemDescription.setText(b.getString("description"));
@@ -33,5 +43,18 @@ public class ItemsDetail extends AppCompatActivity {
         itemCity.setText(b.getString("city"));
         itemTelephone.setText(b.getString("telephone"));
         prix.setText(b.getString("prix"));
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        LatLng loc = new LatLng(lattitude, longitude);
+        googleMap.addMarker(new MarkerOptions().position(loc)
+                .title("Marker in Sydney"));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(loc));
+        googleMap.animateCamera(CameraUpdateFactory.zoomTo(17.0F));
     }
 }
