@@ -17,6 +17,10 @@ public class ItemHolder extends RecyclerView.ViewHolder {
     private TextView itemNom;
     private TextView itemDescription;
     private TextView itemPrix;
+    private TextView itemCity;
+    private TextView itemTelephone;
+    private TextView longitude;
+    private TextView lattitude;
 
     public ItemHolder(View itemView) {
         super(itemView);
@@ -25,12 +29,20 @@ public class ItemHolder extends RecyclerView.ViewHolder {
         itemOwner = (TextView) itemView.findViewById(R.id.itemOwner);
         itemDescription = (TextView) itemView.findViewById(R.id.itemDescription);
         itemPrix = (TextView) itemView.findViewById(R.id.itemPrix);
+        itemCity = (TextView) itemView.findViewById(R.id.itemCity);
+        itemTelephone = (TextView) itemView.findViewById(R.id.telephone);
+        longitude = (TextView) itemView.findViewById(R.id.longitude);
+        lattitude = (TextView) itemView.findViewById(R.id.lattitude);
     }
 
     public void display(Item item){
         itemOwner.setText(item.getNom());
         itemNom.setText(item.getItem());
         itemDescription.setText(item.getDescription());
-        itemPrix.setText(item.getPrix());
+        itemPrix.setText(item.getPrix() + " €");
+        itemCity.setText(item.getCity());
+        itemTelephone.setText(item.getTelephone());
+        longitude.setText(item.getLongitude());
+        lattitude.setText(item.getLattitude());
     }
 }

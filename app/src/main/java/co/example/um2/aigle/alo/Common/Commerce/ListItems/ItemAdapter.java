@@ -13,9 +13,19 @@ import co.example.um2.aigle.alo.R;
  * Created by L'Albatros on 4/2/2018.
  */
 
-public class ItemAdapter extends RecyclerView.Adapter<ItemHolder> {
+public class ItemAdapter extends RecyclerView.Adapter<ItemHolder>  {
 
     List<Item> items;
+    MyOnClickListener myOnClickListener = new MyOnClickListener();
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+        notifyDataSetChanged();
+    }
 
     public ItemAdapter(List<Item> items) {
         this.items = items;
@@ -25,6 +35,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemHolder> {
     public ItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View v = layoutInflater.inflate(R.layout.item_cel, parent, false);
+        v.setOnClickListener(this.myOnClickListener);
         return new ItemHolder(v);
     }
 

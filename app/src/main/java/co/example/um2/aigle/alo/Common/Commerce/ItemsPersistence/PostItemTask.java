@@ -31,11 +31,6 @@ public class PostItemTask extends AsyncTask<String, String, String> {
     }
 
     @Override
-    protected void onPreExecute() {
-
-    }
-
-    @Override
     protected String doInBackground(String... strings) {
         Log.d("Received",strings[0] + " " +strings[1] + " " +strings[2] + " " +strings[3] + " " +strings[4] + " " +strings[5] + " " +strings[6]);
 
@@ -72,6 +67,8 @@ public class PostItemTask extends AsyncTask<String, String, String> {
                 post_data += "="+URLEncoder.encode(strings[5], "utf-8");
                 post_data += "&"+URLEncoder.encode("lattitude", "utf-8");
                 post_data += "="+URLEncoder.encode(strings[6], "utf-8");
+                post_data += "&"+URLEncoder.encode("city", "utf-8");
+                post_data += "="+URLEncoder.encode(strings[7], "utf-8");
 
                 bufferedWriter.write(post_data);
                 bufferedWriter.flush();
