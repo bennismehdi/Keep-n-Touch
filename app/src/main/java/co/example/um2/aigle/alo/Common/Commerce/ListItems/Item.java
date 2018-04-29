@@ -14,8 +14,9 @@ public class Item {
     private String longitude;
     private String lattitude;
     private String city;
+    private String telephone;
 
-    public Item(String nom, String categorie, String item, String description, String prix, String longitude, String lattitude, String city) {
+    public Item(String nom, String categorie, String item, String description, String prix, String longitude, String lattitude, String city, String telephone) {
         this.nom = nom;
         this.categorie = categorie;
         this.item = item;
@@ -24,6 +25,15 @@ public class Item {
         this.longitude = longitude;
         this.lattitude = lattitude;
         this.city = city;
+        this.telephone = telephone;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
 
     public String getCity() {

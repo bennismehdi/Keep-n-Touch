@@ -103,7 +103,7 @@ public class GetItemsByCategorieTask extends AsyncTask<String, String, List<Item
                     Log.d("Line " + i, line);
                     String[] str = line.split("&bptkce&");
                     try{
-                        Item item = new Item(str[0], str[1], str[2], str[3], str[4], str[5], str[6], str[7]);
+                        Item item = new Item(str[0], str[1], str[2], str[3], str[4], str[5], str[6], str[7], str[8]);
                         this.items.add(item);
                     }catch (Exception e){
                         Log.d("Error", "This line is empty or false");

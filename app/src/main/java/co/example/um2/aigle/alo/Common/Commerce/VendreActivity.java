@@ -153,8 +153,8 @@ public class VendreActivity extends AppCompatActivity implements LocationListene
             postItemTask.execute(this.id, str[0], this.itemNom.getText().toString(), this.itemDescription.getText().toString(), this.itemPrix.getText().toString(), this.longitude.getText().toString(),
                     this.lattitude.getText().toString(),
                     this.city);
+            Intent intent = new Intent(VendreActivity.this, ServiceActivity.class);
+            startActivity(intent);
         }
-        Intent intent = new Intent(VendreActivity.this, ServiceActivity.class);
-        startActivity(intent);
     }
 }

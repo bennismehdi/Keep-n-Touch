@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="co.example.um2.aigle.alo.Common.Commerce.ItemsDetail">
+    <RelativeLayout
+        android:id="@+id/block1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/labelItemName"
+            android:text="Article : "
+            android:textSize="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_toRightOf="@id/labelItemName"
+            android:id="@+id/itemName"
+            android:textSize="25dp"
+            android:text="nomItem"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/block2"
+        android:layout_below="@id/block1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="Categorie : "
+            android:textSize="25dp"
+            android:id="@+id/labelItemCategorie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/itemCategorie"
+            android:textSize="25dp"
+            android:layout_toRightOf="@id/labelItemCategorie"
+            android:text="nomItem"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/block3"
+        android:layout_below="@id/block2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/labelItemDescription"
+            android:text="Description : "
+            android:textSize="25dp"
+            android:textColor="@color/colorAccent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="DescriptionDescriptionDescription"
+            android:id="@+id/itemDescription"
+            android:textSize="25dp"
+            android:layout_below="@id/labelItemDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/block4"
+        android:layout_below="@id/block3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/labelItemCity"
+            android:text="Ville : "
+            android:textSize="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <TextView
+            android:id="@+id/itemCity"
+            android:layout_toRightOf="@id/labelItemCity"
+            android:text="Casablanca"
+            android:textSize="25dp"
+            android:textColor="@color/colorPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/block5"
+        android:layout_below="@id/block4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/labelItemTelephone"
+            android:text="Telephone : "
+            android:textSize="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/itemTelephone"
+            android:textSize="25dp"
+            android:text="0588261092"
+            android:textColor="@color/colorPrimary"
+            android:layout_toRightOf="@id/labelItemTelephone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/block6"
+        android:layout_below="@id/block5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/labelOwner"
+            android:text="Owner : "
+            android:textSize="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/owner"
+            android:text="Mehdi"
+            android:textSize="25dp"
+            android:textColor="@color/colorPrimary"
+            android:layout_toRightOf="@id/labelOwner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/block7"
+        android:layout_below="@id/block6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/labelPrix"
+            android:text="Prix : "
+            android:textSize="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/prix"
+            android:text="234 Euro"
+            android:textSize="25dp"
+            android:textColor="@color/colorPrimary"
+            android:layout_toRightOf="@id/labelPrix"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+</RelativeLayout>
