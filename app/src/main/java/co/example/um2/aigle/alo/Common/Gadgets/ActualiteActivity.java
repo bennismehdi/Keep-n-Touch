@@ -279,7 +279,7 @@ public class ActualiteActivity extends Activity implements LocationListener, Yah
 
         }
         protected String doInBackground(String... args) {
-            String xml = "";
+           String xml = "";
 
             String urlParameters = "";
             //TO DO CHANGER "PARIS"

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
 import android.view.View;
 
+import co.example.um2.aigle.alo.ChatActivity;
 import co.example.um2.aigle.alo.Common.Commerce.CommerceActivity;
 import co.example.um2.aigle.alo.Common.News.NewsActivity;
 import co.example.um2.aigle.alo.Common.Gadgets.ActualiteActivity;
@@ -32,6 +33,18 @@ public class ServiceActivity extends AppCompatActivity {
 
     public void goCommerce(View v){
         Intent intent = new Intent(v.getContext(), CommerceActivity.class);
+        startActivity(intent);
+    }
+
+    public void goChat(View v){
+        Intent intent = new Intent(v.getContext(), ChatActivity.class);
+        String[] datas = {};
+        //TO DO//
+        //rendre dynamique : TEST//
+        datas[0] = "remi";
+        datas[1] = "adminGroup";
+        intent.putExtra("user", datas[0]);
+        intent.putExtra("group", datas[1]);
         startActivity(intent);
     }
 }
