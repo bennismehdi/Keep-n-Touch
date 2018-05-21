@@ -23,7 +23,10 @@
     <item android:title="La chaine météo" android:id="@+id/lachainemeteo">
 
     </item>
-    <item android:title="LBC Commerce" android:id="@+id/commerce">
+    <item android:title="Voiture d'occasion" android:id="@+id/occasion">
+
+    </item>
+    <item android:title="Immobilier" android:id="@+id/immobilier">
 
     </item>
 </menu>

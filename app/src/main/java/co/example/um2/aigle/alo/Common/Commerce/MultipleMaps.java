@@ -38,7 +38,7 @@ public class MultipleMaps extends AppCompatActivity implements OnMapReadyCallbac
         LatLng loc = null;
         for(Item i : items){
             loc  = new LatLng(Double.parseDouble(i.getLattitude().toString()), Double.parseDouble(i.getLongitude().toString()));
-            googleMap.addMarker(new MarkerOptions().position(loc).title(i.getItem()));
+            googleMap.addMarker(new MarkerOptions().position(loc).title(i.getItem() + " " + i.getTelephone()));
         }
 
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(loc));

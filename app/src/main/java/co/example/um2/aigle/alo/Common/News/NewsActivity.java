@@ -161,9 +161,15 @@ public class NewsActivity extends AppCompatActivity implements NavigationView.On
                 loadRss(stringBuilder.toString());
                 drawerLayout.closeDrawers();
                 return true;
-            case R.id.commerce:
+            case R.id.occasion:
                 this.stringBuilder = new StringBuilder(RSS_TO_JSON_API);
-                this.stringBuilder.append("https://lbc2rss.superfetatoire.com/rss/74293-test-annonces-languedoc-roussillon");
+                this.stringBuilder.append("https://lbc2rss.superfetatoire.com/rss/76243-voiture-d-occasion.rss");
+                loadRss(stringBuilder.toString());
+                drawerLayout.closeDrawers();
+                return true;
+            case R.id.immobilier:
+                this.stringBuilder = new StringBuilder(RSS_TO_JSON_API);
+                this.stringBuilder.append("https://lbc2rss.superfetatoire.com/rss/76244-immobilier.rss");
                 loadRss(stringBuilder.toString());
                 drawerLayout.closeDrawers();
                 return true;
