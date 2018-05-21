@@ -1,10 +1,12 @@
 package co.example.um2.aigle.alo.Common.Commerce.ListItems;
 
+import java.io.Serializable;
+
 /**
  * Created by L'Albatros on 4/2/2018.
  */
 
-public class Item {
+public class Item implements Serializable {
 
     private String nom;
     private String categorie;

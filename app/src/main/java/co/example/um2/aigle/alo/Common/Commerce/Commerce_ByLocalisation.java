@@ -27,6 +27,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.io.Serializable;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -58,6 +59,7 @@ public class Commerce_ByLocalisation extends Fragment implements LocationListene
     private RecyclerView itemsRV;
     private ItemAdapter itemAdapter;
     private Button vendreButton;
+    private Button mapButton;
     private LocationManager locationManager;
     private Spinner categoriesSpinner;
     private Button searchButton;
@@ -110,7 +112,7 @@ public class Commerce_ByLocalisation extends Fragment implements LocationListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_commerce__by_list, container, false);
+        View v = inflater.inflate(R.layout.fragment_commerce__by_localisation, container, false);
         locationManager = (LocationManager) v.getContext().getSystemService(v.getContext().LOCATION_SERVICE);
 
         String userCity = getCity(v.getContext());
@@ -123,6 +125,7 @@ public class Commerce_ByLocalisation extends Fragment implements LocationListene
         a.show();
 
         vendreButton = (Button) v.findViewById(R.id.vendreButton);
+
         vendreButton.setOnClickListener(new View.OnClickListener() {
             boolean gps_enabled = false;
             boolean network_enable = false;
@@ -145,6 +148,16 @@ public class Commerce_ByLocalisation extends Fragment implements LocationListene
                     Intent intent = new Intent(v.getContext(), VendreActivity.class);
                     startActivity(intent);
                 }
+            }
+        });
+
+        mapButton = (Button) v.findViewById(R.id.multipleMaps);
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), MultipleMaps.class);
+                intent.putExtra("LIST", (Serializable) items);
+                startActivity(intent);
             }
         });
 

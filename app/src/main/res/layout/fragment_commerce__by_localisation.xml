@@ -46,7 +46,7 @@
         <Button
             android:id="@+id/searchButton"
             android:text="search"
-            android:layout_weight="0.2"
+            android:layout_weight="0.1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
@@ -56,9 +56,17 @@
         <Button
             android:id="@+id/favorisButton"
             android:text="Favoris"
-            android:layout_weight="0.2"
+            android:layout_weight="0.1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/multipleMaps"
+            android:text="MAP"
+            android:layout_weight="0.1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
 
 

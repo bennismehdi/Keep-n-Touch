@@ -53,7 +53,7 @@ public class ItemsDetail extends AppCompatActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         LatLng loc = new LatLng(lattitude, longitude);
         googleMap.addMarker(new MarkerOptions().position(loc)
-                .title("Marker in Sydney"));
+                .title(itemName.getText().toString()));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(loc));
         googleMap.animateCamera(CameraUpdateFactory.zoomTo(17.0F));
     }
