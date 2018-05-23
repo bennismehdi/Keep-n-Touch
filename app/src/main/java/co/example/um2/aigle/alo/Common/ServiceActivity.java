@@ -41,10 +41,7 @@ public class ServiceActivity extends AppCompatActivity {
         String[] datas = {};
         //TO DO//
         //rendre dynamique : TEST//
-        datas[0] = "remi";
-        datas[1] = "adminGroup";
-        intent.putExtra("user", datas[0]);
-        intent.putExtra("group", datas[1]);
+        intent.putExtra("group", "1");
         startActivity(intent);
     }
 }

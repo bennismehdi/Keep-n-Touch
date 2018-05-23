@@ -42,9 +42,9 @@ class ListNewsAdapter extends BaseAdapter {
             holder = new ListNewsViewHolder();
             convertView = LayoutInflater.from(activity).inflate(
                     R.layout.list_row, parent, false);
-            holder.galleryImage = (ImageView) convertView.findViewById(R.id.ImageView_news);
-            holder.title = (TextView) convertView.findViewById(R.id.TextView_newsT);
-            holder.sdetails = (TextView) convertView.findViewById(R.id.TextView_newsD);
+            holder.galleryImage = convertView.findViewById(R.id.ImageView_news);
+            holder.title = convertView.findViewById(R.id.TextView_newsT);
+            holder.sdetails = convertView.findViewById(R.id.TextView_newsD);
             convertView.setTag(holder);
         } else {
             holder = (ListNewsViewHolder) convertView.getTag();

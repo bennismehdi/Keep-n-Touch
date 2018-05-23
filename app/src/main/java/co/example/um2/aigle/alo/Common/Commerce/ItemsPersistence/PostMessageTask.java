@@ -38,7 +38,6 @@ public class PostMessageTask extends AsyncTask<String, String, String> {
         InputStream inputStream;
         BufferedReader bufferedReader;
 
-        //TO DO créer fichier !!//
         String path = "https://quickandfresh.000webhostapp.com/postmessage.php";
 
         try {

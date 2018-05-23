@@ -18,12 +18,20 @@
         android:textColor="@color/colorPureWhite"
         android:text="test message"/>
 
-    <ImageView
+    <!--<ImageView
         android:id="@+id/ImageView_profilSend"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@drawable/rounded_corner_image"
         android:src="@drawable/ic_cloudy"/>
+-->
+    <TextView
+        android:id="@+id/TextView_idSend"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/rounded_corner_image"
+        android:text="test id"/>
 
 </LinearLayout>
