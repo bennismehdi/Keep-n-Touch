@@ -49,6 +49,13 @@
                 android:visibility="visible"
                 />
 
+            <!--<ProgressBar
+                android:id="@+id/Progress_news"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:indeterminateTint="@color/colorTheme"/>-->
+
         </RelativeLayout>
 
         <LinearLayout

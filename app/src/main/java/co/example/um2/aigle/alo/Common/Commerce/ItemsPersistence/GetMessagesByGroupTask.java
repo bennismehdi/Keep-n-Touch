@@ -99,7 +99,7 @@ public class GetMessagesByGroupTask extends AsyncTask<String, String, List<ChatM
                     Log.d("Line " + i, line);
                     String[] str = line.split("&bptkce&");
                     try{
-                        ChatMessage m = new ChatMessage(str[0], str[2]);
+                        ChatMessage m = new ChatMessage(str[2], str[0]);
                         this.messages.add(m);
                     }catch (Exception e){
                         Log.d("Error", "This line is empty or false");

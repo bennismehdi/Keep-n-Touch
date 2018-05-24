@@ -82,7 +82,7 @@ public class ChatActivity extends AppCompatActivity {
                 String message = editTextMessage.getText().toString();
                 if(!message.isEmpty()){
                     PostMessageTask postMessageTask = new PostMessageTask(context.getApplicationContext());
-                    postMessageTask.execute("14", "1", message);
+                    postMessageTask.execute(user, group, message);
 //                    Intent intent = new Intent(ChatActivity.this, ServiceActivity.class);
 //                    startActivity(intent);
                     editTextMessage.setText("");
