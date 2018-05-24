@@ -117,13 +117,6 @@ public class Commerce_ByLocalisation extends Fragment implements LocationListene
 
         String userCity = getCity(v.getContext());
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-        builder.setTitle("Ville");
-        builder.setMessage(userCity);
-        builder.setPositiveButton("ok", null);
-        AlertDialog a = builder.create();
-        a.show();
-
         vendreButton = (Button) v.findViewById(R.id.vendreButton);
 
         vendreButton.setOnClickListener(new View.OnClickListener() {
@@ -267,6 +260,12 @@ public class Commerce_ByLocalisation extends Fragment implements LocationListene
         }catch (Exception e){
 
         }
+        AlertDialog.Builder builder = new AlertDialog.Builder(c);
+        builder.setTitle("Ville");
+        builder.setMessage(userCity);
+        builder.setPositiveButton("ok", null);
+        AlertDialog a = builder.create();
+        a.show();
         return userCity;
     }
 
