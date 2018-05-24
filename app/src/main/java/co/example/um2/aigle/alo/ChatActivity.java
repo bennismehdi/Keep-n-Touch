@@ -100,7 +100,7 @@ public class ChatActivity extends AppCompatActivity {
         messages = new ArrayList<ChatMessage>();
         //LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
         listMessagesAdapter = new ListMessagesAdapter(messages);
-        //listViewMessages.setLayoutManager(mLayoutManager);
+        listViewMessages.setLayoutManager(new LinearLayoutManager(ChatActivity.this));
         listViewMessages.setAdapter(listMessagesAdapter);
         GetMessagesByGroupTask getMessagesByGroupTask = new GetMessagesByGroupTask(context, messages, listMessagesAdapter);
         getMessagesByGroupTask.execute("1");

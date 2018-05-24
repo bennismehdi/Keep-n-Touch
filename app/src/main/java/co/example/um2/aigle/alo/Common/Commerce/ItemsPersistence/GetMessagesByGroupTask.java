@@ -42,11 +42,13 @@ public class GetMessagesByGroupTask extends AsyncTask<String, String, List<ChatM
     }
 
     protected void onPostExecute(List<ChatMessage> messages) {
+        Log.d("POST EXE ?", "onPostExecute: reached");
         this.messagesAdapter.setListMessages(this.messages);
-        this.messagesAdapter.notifyDataSetChanged();
         if(dialog.isShowing()){
+            Log.d("progress", "progress bar: ");
             dialog.dismiss();
         }
+        this.messagesAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -82,6 +84,7 @@ public class GetMessagesByGroupTask extends AsyncTask<String, String, List<ChatM
                 post_data += "="+URLEncoder.encode(strings[0], "utf-8");
 
                 bufferedWriter.write(post_data);
+                Log.d("data posted", post_data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
 
