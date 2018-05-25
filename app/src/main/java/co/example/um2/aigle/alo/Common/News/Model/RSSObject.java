@@ -2,6 +2,8 @@ package co.example.um2.aigle.alo.Common.News.Model;
 
 import java.util.List;
 
+import co.example.um2.aigle.alo.Common.Commerce.Item;
+
 /**
  * Created by L'Albatros on 3/11/2018.
  */

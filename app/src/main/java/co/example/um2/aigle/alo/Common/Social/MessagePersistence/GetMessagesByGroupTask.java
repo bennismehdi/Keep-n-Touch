@@ -1,9 +1,8 @@
-package co.example.um2.aigle.alo.Common.Commerce.ItemsPersistence;
+package co.example.um2.aigle.alo.Common.Social.MessagePersistence;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.Message;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -19,8 +18,8 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.List;
 
-import co.example.um2.aigle.alo.ChatActivity.ListMessagesAdapter;
-import co.example.um2.aigle.alo.Common.News.Model.ChatMessage;
+import co.example.um2.aigle.alo.Common.Social.ChatActivity.ListMessagesAdapter;
+import co.example.um2.aigle.alo.Common.Social.ChatMessage;
 
 /**
  * Created by dewispelaere on 30/04/18.

@@ -1,6 +1,5 @@
 package co.example.um2.aigle.alo.Common.Registration;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -12,8 +11,7 @@ import android.widget.EditText;
 
 import java.util.concurrent.ExecutionException;
 
-import co.example.um2.aigle.alo.Common.Registration.RegistrationTask;
-import co.example.um2.aigle.alo.MainActivity;
+import co.example.um2.aigle.alo.LoginActivity;
 import co.example.um2.aigle.alo.R;
 
 public class RegistrationActivity extends AppCompatActivity {
@@ -103,7 +101,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 builder.setPositiveButton("ok", new AlertDialog.OnClickListener(){
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(getBaseContext() , MainActivity.class);
+                                Intent intent = new Intent(getBaseContext() , LoginActivity.class);
                                 startActivity(intent);
                             }
                         }
@@ -124,7 +122,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 builder.setPositiveButton("ok", new AlertDialog.OnClickListener(){
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(getBaseContext() , MainActivity.class);
+                                Intent intent = new Intent(getBaseContext() , LoginActivity.class);
                                 startActivity(intent);
                             }
                         }
@@ -136,7 +134,7 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     public void goLogin(View v){
-        Intent intent = new Intent(this , MainActivity.class);
+        Intent intent = new Intent(this , LoginActivity.class);
         startActivity(intent);
     }
 

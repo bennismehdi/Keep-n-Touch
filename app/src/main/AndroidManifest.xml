@@ -42,7 +42,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -77,7 +77,7 @@
 
         <receiver android:name=".Common.Gadgets.AlarmReceveirActivity" />
 
-        <activity android:name=".ChatActivity" />
+        <activity android:name=".Common.Social.ChatActivity" />
         <activity android:name=".Common.Commerce.ItemsDetail" />
         <activity android:name=".Common.Commerce.MultipleMaps"></activity>
     </application>

@@ -1,4 +1,4 @@
-package co.example.um2.aigle.alo.Common.News.Model;
+package co.example.um2.aigle.alo.Common.Commerce;
 
 import android.text.Html;
 

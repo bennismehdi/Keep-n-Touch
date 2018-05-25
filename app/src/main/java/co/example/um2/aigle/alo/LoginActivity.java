@@ -1,6 +1,5 @@
 package co.example.um2.aigle.alo;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -14,7 +13,6 @@ import android.widget.EditText;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.Console;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -29,16 +27,15 @@ import java.util.concurrent.ExecutionException;
 import co.example.um2.aigle.alo.Common.Configuration.ConfiguratoinActivity;
 import co.example.um2.aigle.alo.Common.Registration.RegistrationActivity;
 import co.example.um2.aigle.alo.Common.ServiceActivity;
-import co.example.um2.aigle.alo.Common.Welcome.WelcomeActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     private EditText pseudo, motdepasse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         try{
             SharedPreferences sharedPreferences = getSharedPreferences("AloAloPreferences", MODE_PRIVATE);
@@ -52,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             String motdepasse = sharedPreferences.getString("motdepasse", null);
 
             if(id != null && nom != null && prenom != null && pseudo != null && mail != null && telephone != null && motdepasse != null){
-                Intent intent = new Intent(MainActivity.this, ServiceActivity.class);
+                Intent intent = new Intent(LoginActivity.this, ServiceActivity.class);
                 startActivity(intent);
             }
 

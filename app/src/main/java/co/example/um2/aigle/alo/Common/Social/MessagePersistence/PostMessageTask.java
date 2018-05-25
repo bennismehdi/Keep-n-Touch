@@ -1,4 +1,4 @@
-package co.example.um2.aigle.alo.Common.Commerce.ItemsPersistence;
+package co.example.um2.aigle.alo.Common.Social.MessagePersistence;
 
 import android.content.Context;
 import android.os.AsyncTask;

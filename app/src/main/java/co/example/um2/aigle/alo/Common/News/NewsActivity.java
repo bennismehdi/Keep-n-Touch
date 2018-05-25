@@ -1,8 +1,6 @@
 package co.example.um2.aigle.alo.Common.News;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -15,12 +13,10 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.google.gson.Gson;
 
 import co.example.um2.aigle.alo.Common.News.Handler.HTTPDataHandler;
-import co.example.um2.aigle.alo.Common.News.Model.Item;
 import co.example.um2.aigle.alo.Common.News.Model.RSSObject;
 import co.example.um2.aigle.alo.R;
 

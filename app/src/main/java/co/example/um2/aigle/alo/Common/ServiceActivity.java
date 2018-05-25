@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
 import android.view.View;
 
-import co.example.um2.aigle.alo.ChatActivity;
+import co.example.um2.aigle.alo.Common.Social.ChatActivity;
 import co.example.um2.aigle.alo.Common.Commerce.CommerceActivity;
 import co.example.um2.aigle.alo.Common.News.NewsActivity;
 import co.example.um2.aigle.alo.Common.Gadgets.ActualiteActivity;
